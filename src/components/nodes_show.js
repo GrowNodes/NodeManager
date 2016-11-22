@@ -19,15 +19,16 @@ class NodesShow extends Component {
     
     render () {
         return (
-            <div>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat iure cum, minus expedita earum iusto adipisci aspernatur ea dignissimos provident! Totam nihil fuga nulla culpa optio, assumenda, doloremque quis nesciunt!
-            </div>
+            <p>
+                {this.props.message}
+            </p>
         );
     }
 }
 
 function mapStateToProps (state) {
-    return { node: state.nodes.node }
+    console.log(state.mqtt);
+    return { message: state.mqtt.message }
 }
 function mapDispatchToProps(dispatch) {
   return {
