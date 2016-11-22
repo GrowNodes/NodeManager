@@ -12,18 +12,13 @@ import promise from 'redux-promise'
 
 import MqttInstance from './utils/Mqtt.js';
 import * as ChatActions from './actions';
+import * as ActionTypes from './actions/types.js';
 
 const createStoreWithMiddleware = applyMiddleware(
     promise
 )(createStore);
 const finalStore = createStoreWithMiddleware(reducers)
-// startMqtt(createStoreWithMiddleware);
 
-ReactDOM.render(
-  <Provider store={finalStore}>
-    <Router history={browserHistory} routes={routes} />
-  </Provider>
-  , document.querySelector('.container'));
 
 const URL = 'test.mosquitto.org';
 const sock = {
@@ -33,21 +28,22 @@ const sock = {
     return finalStore.dispatch(ChatActions.receiveMessage(msg));
   },
   wsListener: () => {
-    // const { lastAction } = redux.getState();
+    const { lastAction } = finalStore.getState();
 
-    // switch (lastAction.type) {
-    //   case ActionTypes.POST_MESSAGE:
-    //     return sock.ws.postMessage(lastAction.text);
+    switch (lastAction.type) {
+      case ActionTypes.POST_MESSAGE:
+        return sock.ws.postMessage(lastAction.text);
 
-    //   case ActionTypes.CONNECT:
-    //     return sock.startWS();
+      case ActionTypes.MQTT_CONNECT:
+      	console.log("starting")
+        return sock.startWS();
 
-    //   case ActionTypes.DISCONNECT:
-    //     return sock.stopWS();
+      case ActionTypes.DISCONNECT:
+        return sock.stopWS();
 
-    //   default:
-    //     return;
-    // }
+      default:
+        return;
+    }
   },
   stopWS: () => {
     sock.ws.close();
@@ -59,5 +55,12 @@ const sock = {
     sock.ws = new MqttInstance(sock.URL, sock.wsDipatcher)
   }
 };
-sock.startWS();
-finalStore.subscribe(() => sock.wsListener());
+// sock.wsListener();
+finalStore.subscribe(sock.wsListener);
+
+
+ReactDOM.render(
+  <Provider store={finalStore}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>
+  , document.querySelector('.container'));

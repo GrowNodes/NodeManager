@@ -1,4 +1,4 @@
-import { FETCH_NODES, FETCH_NODE } from '../actions/index';
+import { FETCH_NODES, FETCH_NODE, MQTT_CONNECT } from '../actions/types';
 
 const INITIAL_STATE = { all: [], node: null };
 
@@ -14,5 +14,10 @@ export default function(state = INITIAL_STATE, action) {
 
         case FETCH_NODE:
             return {...state, node: action.payload}
+        case MQTT_CONNECT:
+			console.log("mqtt connect dispatch");
+			return {
+				...state
+			}
     }
 }

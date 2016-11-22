@@ -1,8 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
-import { fetchNode, deleteNode } from '../actions/index';
+import * as ChatActions from '../actions';
 
 
 class NodesShow extends Component {
@@ -10,32 +11,16 @@ class NodesShow extends Component {
         router: PropTypes.object
     };
 
-    componentWillMount() {
-        this.props.fetchNode(this.props.params.node_id);
+    componentDidMount() {
+        console.log("calling connect action");
+        this.props.actions.mqttConnect()
     }
 
-    onDeleteClick() {
-        this.props.deleteNode(this.props.params.node_id)
-            .then(() => {
-                this.context.router.push('/');
-            });
-    }
-
+    
     render () {
-        const {node} = this.props;
-
-        if (!node) {
-            return <div>Loading...</div>
-        };
         return (
             <div>
-                <Link to="/" className="btn btn-primary">Back to index</Link>
-                <button
-                    className="btn btn-danger pull-xs-right"
-                    onClick={this.onDeleteClick.bind(this)}>Delete</button>
-                <h3>{node.title}</h3>
-                <h6>Categories: {node.categories}</h6>
-                <p>{node.content}</p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat iure cum, minus expedita earum iusto adipisci aspernatur ea dignissimos provident! Totam nihil fuga nulla culpa optio, assumenda, doloremque quis nesciunt!
             </div>
         );
     }
@@ -44,5 +29,10 @@ class NodesShow extends Component {
 function mapStateToProps (state) {
     return { node: state.nodes.node }
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(ChatActions, dispatch)
+  };
+}
 
-export default connect(mapStateToProps, { fetchNode, deleteNode })(NodesShow);
+export default connect(mapStateToProps, mapDispatchToProps)(NodesShow);

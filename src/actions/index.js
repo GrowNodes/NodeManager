@@ -1,13 +1,6 @@
 import axios from 'axios';
 
-export const FETCH_NODES = 'FETCH_NODES';
-export const CREATE_NODE = 'CREATE_NODE';
-export const FETCH_NODE = 'FETCH_NODE';
-export const DELETE_NODE = 'DELETE_NODE';
-
-export const NEW_MQTT_MESSAGE = 'NEW_MQTT_MESSAGE';
-
-
+import { NEW_MQTT_MESSAGE, FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT } from './types.js';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
 const API_KEY = '?key=some_offensive_words'
@@ -16,7 +9,12 @@ export function receiveMessage(message) {
     console.log(message);
   return { type: NEW_MQTT_MESSAGE, payload: message };
 }
-
+export function mqttConnect() {
+    console.log("returning connect action type")
+    return {
+        type: MQTT_CONNECT
+    }
+}
 
 export function fetchNodes() {
     const request = axios.get(`${ROOT_URL}/nodes${API_KEY}`);
