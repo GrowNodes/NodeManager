@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { createNode } from '../actions/index'
 
-class NodesNew extends Component {
+class NodeNew extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
@@ -73,7 +73,7 @@ function validate(values) {
 
 // is just like connect, but new first arg is config object
 export default reduxForm({
-    form: 'NodesNewForm',
+    form: 'NodeNewForm',
     fields: ['title', 'categories', 'content'],
     validate
-}, null, { createNode })(NodesNew);
+}, null, { createNode })(NodeNew);
