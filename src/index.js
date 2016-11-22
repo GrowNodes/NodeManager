@@ -51,10 +51,10 @@ const sock = {
     sock.ws.close();
     sock.ws = null
   },
-  startWS: (channel) => {
+  startWS: (topics) => {
     if(!!sock.ws) sock.ws.close();
 
-    sock.ws = new MqttInstance(sock.URL, sock.wsDipatcher, channel)
+    sock.ws = new MqttInstance(sock.URL, sock.wsDipatcher, topics)
   }
 };
 // sock.wsListener();

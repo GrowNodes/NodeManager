@@ -1,14 +1,16 @@
 import mqtt from 'mqtt';
 // See index.js
 export default class Mqtt {
-  constructor(url, dispatcher, channel) {
+  constructor(url, dispatcher, topics) {
   	console.log("construtro")
   	var parent = this;
     this.client  = mqtt.connect(`mqtt://${url}:8080`);
     this.dispatcher = dispatcher
     this.client.on('connect', function () {
-		parent.client.subscribe("nodes/"+channel+"/#")
-		parent.client.publish(channel, 'Hello mqtt')
+    for (var i = topics.length - 1; i >= 0; i--) {
+  		parent.client.subscribe("nodes/"+topics[i]+"/#")
+  		parent.client.publish(topics[i], 'Hello mqtt')
+    }
 	})
 	
 	this.client.on('message', function(topic, payload) {

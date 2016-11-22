@@ -15,11 +15,11 @@ export function mqttIncoming(topic, message) {
     // console.log(message);
   return { type: subtopic, payload: {message, serial} };
 }
-export function mqttConnect(topic) {
+export function mqttConnect(topics) {
     console.log("returning connect action type")
     return {
         type: MQTT_CONNECT,
-        payload: topic
+        payload: topics
     }
 }
 

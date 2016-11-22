@@ -11,10 +11,11 @@ export default function(state = INITIAL_STATE, action) {
         
         case MQTT_ACTION_TYPES.MQTT_CONNECT:
         console.log("mqtt connect dispatch");
-        return {
-            ...state,
-            channel: action.payload
+        var newState = {...state}
+        for (var i = action.payload.length - 1; i >= 0; i--) {
+            newState[action.payload[i]] = {}
         }
+        return newState;
         // Topic matching action names
         case "$homie":
         case "$mac":

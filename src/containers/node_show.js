@@ -15,7 +15,7 @@ class NodesShow extends Component {
 
     componentWillMount() {
         console.log("calling connect action");
-        this.props.actions.mqttConnect(this.props.params.node_id)
+        this.props.actions.mqttConnect([this.props.params.node_id])
     }
 
     componentWillUnmount() {
