@@ -11,7 +11,7 @@ import reducers from './reducers';
 import promise from 'redux-promise'
 
 import MqttInstance from './utils/Mqtt.js';
-import * as ChatActions from './actions';
+import * as Actions from './actions';
 import * as ActionTypes from './actions/types.js';
 
 const createStoreWithMiddleware = applyMiddleware(
@@ -25,7 +25,7 @@ const sock = {
   ws: null,
   URL: 'test.mosquitto.org',
   wsDipatcher: (topic, message) => {
-    return finalStore.dispatch(ChatActions.mqttIncoming(topic, message));
+    return finalStore.dispatch(Actions.mqttIncoming(topic, message));
   },
   wsListener: () => {
     const { lastAction } = finalStore.getState();

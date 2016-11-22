@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
-import * as ChatActions from '../actions';
+import * as Actions from '../actions';
 
 
 class NodesShow extends Component {
@@ -32,7 +32,7 @@ function mapStateToProps (state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ChatActions, dispatch)
+    actions: bindActionCreators(Actions, dispatch)
   };
 }
 

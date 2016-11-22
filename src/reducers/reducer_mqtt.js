@@ -1,4 +1,4 @@
-import { MQTT_INCOMING, MQTT_CONNECT } from '../actions/types';
+import { MQTT_CONNECT } from '../actions/types';
 
 const INITIAL_STATE = { message: [], channel: null};
 

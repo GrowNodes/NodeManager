@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { MQTT_INCOMING, FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT } from './types.js';
+import { FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT } from './types.js';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
 const API_KEY = '?key=some_offensive_words'
