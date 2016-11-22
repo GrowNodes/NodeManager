@@ -16,6 +16,12 @@ export default function(state = INITIAL_STATE, action) {
             newState[action.payload[i]] = {}
         }
         return newState;
+
+        
+        case MQTT_ACTION_TYPES.MQTT_DISCONNECT:
+        console.log("mqtt disconnect dispatch");
+        return INITIAL_STATE;
+        
         // Topic matching action names
         case "$homie":
         case "$mac":
