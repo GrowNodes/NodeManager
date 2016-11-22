@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 
 import * as Actions from '../actions';
 import GrowScheduleEditor from '../components/GrowScheduleEditor';
+import Moment from 'react-moment';
+import TimeAgo from 'react-timeago'
 
 class NodesShow extends Component {
     static contextTypes = {
@@ -16,6 +18,13 @@ class NodesShow extends Component {
         this.props.actions.mqttConnect(this.props.params.node_id)
     }
 
+    renderLastSeen() {
+        if (this.props.mqtt["last_seen"]) {
+            return <TimeAgo date={new Date(this.props.mqtt["last_seen"]*1000)} />
+        }
+        return null;
+    }
+
     
     render () {
         return (
@@ -24,7 +33,7 @@ class NodesShow extends Component {
                 <p>
                     Nickname: {this.props.mqtt["$name"]}<br/>
                     Online? {this.props.mqtt["$online"]}<br/>
-                    Last Seen: {this.props.mqtt["last_seen"]}
+                    Last Seen: {this.renderLastSeen()}
                 </p>
                 <h2>System Information</h2>
                 <p>

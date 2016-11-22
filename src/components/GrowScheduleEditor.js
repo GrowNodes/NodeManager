@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchNodes } from '../actions/index';
 import { Link } from 'react-router';
+import Moment from 'react-moment';
 
 class GrowScheduleEditor extends Component {
     
@@ -20,7 +21,9 @@ class GrowScheduleEditor extends Component {
         return this.props.grow_schedule.map((timeRange) => {
             return (
                     <div>
-                        <strong>From {timeRange.from} to {timeRange.to}</strong>
+                        <strong>
+                            From <Moment unix>{timeRange.from}</Moment> to <Moment unix>{timeRange.to}</Moment> 
+                        </strong>
                         <ul>
                             {this.renderEnsures(timeRange.ensure)}
                         </ul>

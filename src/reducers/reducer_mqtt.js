@@ -29,7 +29,7 @@ export default function(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 [action.type]: action.payload,
-                last_seen: (new Date).getTime()
+                last_seen: Math.floor((new Date).getTime() / 1000)
             }
         case "$implementation/config":
             const config = JSON.parse(action.payload);
@@ -38,7 +38,7 @@ export default function(state = INITIAL_STATE, action) {
                 ...state,
                 [action.type]: config,
                 grow_schedule: grow_schedule,
-                last_seen: (new Date).getTime()
+                last_seen: Math.floor((new Date).getTime() / 1000)
             }
     }
 }
