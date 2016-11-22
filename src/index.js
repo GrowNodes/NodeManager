@@ -40,7 +40,7 @@ const sock = {
   	console.log(lastAction);
         return sock.startWS(lastAction.payload);
 
-      case ActionTypes.DISCONNECT:
+      case ActionTypes.MQTT_DISCONNECT:
         return sock.stopWS();
 
       default:

@@ -13,9 +13,14 @@ class NodesShow extends Component {
         router: PropTypes.object
     };
 
-    componentDidMount() {
+    componentWillMount() {
         console.log("calling connect action");
         this.props.actions.mqttConnect(this.props.params.node_id)
+    }
+
+    componentWillUnmount() {
+        console.log("calling disconnect action");
+        this.props.actions.mqttDisconnect()
     }
 
     renderLastSeen() {

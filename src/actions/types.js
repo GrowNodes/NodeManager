@@ -4,3 +4,4 @@ export const FETCH_NODE = 'FETCH_NODE';
 export const DELETE_NODE = 'DELETE_NODE';
 
 export const MQTT_CONNECT = 'MQTT_CONNECT';
+export const MQTT_DISCONNECT = 'MQTT_DISCONNECT';

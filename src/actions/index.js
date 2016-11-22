@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT } from './types.js';
+import { FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT, MQTT_DISCONNECT } from './types.js';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
 const API_KEY = '?key=some_offensive_words'
@@ -19,6 +19,13 @@ export function mqttConnect(topic) {
     return {
         type: MQTT_CONNECT,
         payload: topic
+    }
+}
+
+export function mqttDisconnect() {
+    console.log("returning disconnect action type")
+    return {
+        type: MQTT_DISCONNECT
     }
 }
 
