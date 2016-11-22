@@ -13,7 +13,7 @@ class NodesShow extends Component {
 
     componentDidMount() {
         console.log("calling connect action");
-        this.props.actions.mqttConnect()
+        this.props.actions.mqttConnect(this.props.params.node_id)
     }
 
     

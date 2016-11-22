@@ -1,6 +1,6 @@
 import { MQTT_INCOMING, MQTT_CONNECT } from '../actions/types';
 
-const INITIAL_STATE = { message: null};
+const INITIAL_STATE = { message: [], channel: null};
 
 
 
@@ -12,9 +12,14 @@ export default function(state = INITIAL_STATE, action) {
         case MQTT_CONNECT:
         console.log("mqtt connect dispatch");
         return {
-            ...state
+            ...state,
+            channel: action.payload
         }
         case MQTT_INCOMING:
-            return { ...state, message: action.payload }
+        console.log(state)
+            return {
+                ...state,
+                message: [...state.message, action.payload]
+            }
     }
 }

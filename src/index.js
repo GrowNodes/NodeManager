@@ -36,7 +36,8 @@ const sock = {
 
       case ActionTypes.MQTT_CONNECT:
       	console.log("starting")
-        return sock.startWS();
+  	console.log(lastAction);
+        return sock.startWS(lastAction.payload);
 
       case ActionTypes.DISCONNECT:
         return sock.stopWS();
@@ -49,10 +50,10 @@ const sock = {
     sock.ws.close();
     sock.ws = null
   },
-  startWS: () => {
+  startWS: (channel) => {
     if(!!sock.ws) sock.ws.close();
 
-    sock.ws = new MqttInstance(sock.URL, sock.wsDipatcher)
+    sock.ws = new MqttInstance(sock.URL, sock.wsDipatcher, channel)
   }
 };
 // sock.wsListener();

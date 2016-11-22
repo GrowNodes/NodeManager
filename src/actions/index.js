@@ -9,10 +9,11 @@ export function receiveMessage(message) {
     console.log(message);
   return { type: MQTT_INCOMING, payload: message };
 }
-export function mqttConnect() {
+export function mqttConnect(topic) {
     console.log("returning connect action type")
     return {
-        type: MQTT_CONNECT
+        type: MQTT_CONNECT,
+        payload: topic
     }
 }
 
