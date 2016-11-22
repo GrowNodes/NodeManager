@@ -6,13 +6,13 @@ export default class Mqtt {
   	var parent = this;
     this.client  = mqtt.connect(`mqtt://${url}:8080`);
     this.dispatcher = dispatcher
-	this.client.on('connect', function () {
-		parent.client.subscribe(channel)
+    this.client.on('connect', function () {
+		parent.client.subscribe(channel+"/#")
 		parent.client.publish(channel, 'Hello mqtt')
 	})
 	
 	this.client.on('message', function(topic, payload) {
-		dispatcher(payload.toString())
+		dispatcher(topic, payload.toString())
 	})
   }
 

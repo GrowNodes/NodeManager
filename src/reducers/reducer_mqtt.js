@@ -15,8 +15,7 @@ export default function(state = INITIAL_STATE, action) {
             ...state,
             channel: action.payload
         }
-        case MQTT_INCOMING:
-        console.log(state)
+        case "asdf":
             return {
                 ...state,
                 message: [...state.message, action.payload]

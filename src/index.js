@@ -24,8 +24,8 @@ const URL = 'test.mosquitto.org';
 const sock = {
   ws: null,
   URL: 'test.mosquitto.org',
-  wsDipatcher: (msg) => {
-    return finalStore.dispatch(ChatActions.receiveMessage(msg));
+  wsDipatcher: (topic, message) => {
+    return finalStore.dispatch(ChatActions.mqttIncoming(topic, message));
   },
   wsListener: () => {
     const { lastAction } = finalStore.getState();

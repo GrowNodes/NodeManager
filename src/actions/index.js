@@ -5,9 +5,11 @@ import { MQTT_INCOMING, FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
 const API_KEY = '?key=some_offensive_words'
 
-export function receiveMessage(message) {
+export function mqttIncoming(topic, message) {
+    const subtopic = topic.substring(topic.indexOf("/") + 1);
+    console.log(subtopic);
     console.log(message);
-  return { type: MQTT_INCOMING, payload: message };
+  return { type: subtopic, payload: message };
 }
 export function mqttConnect(topic) {
     console.log("returning connect action type")
