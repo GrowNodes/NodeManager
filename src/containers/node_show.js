@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
 import * as Actions from '../actions';
-
+import GrowScheduleEditor from '../components/GrowScheduleEditor';
 
 class NodesShow extends Component {
     static contextTypes = {
@@ -19,20 +19,30 @@ class NodesShow extends Component {
     
     render () {
         return (
-            <ul>
-<li>$online: {this.props.mqtt["$online"]}</li>
-<li>last_seen: {this.props.mqtt["last_seen"]}</li>
-<li>$homie: {this.props.mqtt["$homie"]}</li>
-<li>$mac: {this.props.mqtt["$mac"]}</li>
-<li>$name: {this.props.mqtt["$name"]}</li>
-<li>$localip: {this.props.mqtt["$localip"]}</li>
-<li>$fw/name: {this.props.mqtt["$fw/name"]}</li>
-<li>$fw/version: {this.props.mqtt["$fw/version"]}</li>
-<li>$fw/checksum: {this.props.mqtt["$fw/checksum"]}</li>
-<li>$implementation/config: {this.props.mqtt["$implementation/config"]}</li>
-<li>$implementation/ota/enabled: {this.props.mqtt["$implementation/ota/enabled"]}</li>
-<li>$stats/signal: {this.props.mqtt["$stats/signal"]}</li>
-            </ul>
+            <div>
+                <h1>Grow Node {this.props.params.node_id}</h1>
+                <p>
+                    Nickname: {this.props.mqtt["$name"]}<br/>
+                    Online? {this.props.mqtt["$online"]}<br/>
+                    Last Seen: {this.props.mqtt["last_seen"]}
+                </p>
+                <h2>System Information</h2>
+                <p>
+                    Framework Version: {this.props.mqtt["$homie"]}<br/>
+                    Firmware: {this.props.mqtt["$fw/name"]}<br/>
+                    Version: {this.props.mqtt["$fw/version"]}<br/>
+                    Checksum: {this.props.mqtt["$fw/checksum"]}<br/>
+                    OTA Enabled: {this.props.mqtt["$implementation/ota/enabled"]}
+                </p>
+                <h2>WiFi Information</h2>
+                <p>
+                    Wifi Signal Strength: {this.props.mqtt["$stats/signal"]}<br/>
+                    MAC Address: {this.props.mqtt["$mac"]}<br/>
+                    Local IP Address: {this.props.mqtt["$localip"]}
+                </p>
+                <h2>Grow Schedule</h2>
+                <GrowScheduleEditor grow_schedule={this.props.mqtt.grow_schedule}/>
+            </div>
         );
     }
 }

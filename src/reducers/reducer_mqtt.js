@@ -24,12 +24,20 @@ export default function(state = INITIAL_STATE, action) {
         case "$fw/name":
         case "$fw/version":
         case "$fw/checksum":
-        case "$implementation/config":
         case "$implementation/ota/enabled":
         case "$stats/signal":
             return {
                 ...state,
                 [action.type]: action.payload,
+                last_seen: (new Date).getTime()
+            }
+        case "$implementation/config":
+            const config = JSON.parse(action.payload);
+            const grow_schedule = JSON.parse(config.settings.schedule);
+            return {
+                ...state,
+                [action.type]: config,
+                grow_schedule: grow_schedule,
                 last_seen: (new Date).getTime()
             }
     }
