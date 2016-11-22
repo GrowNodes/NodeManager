@@ -26,19 +26,28 @@ export default function(state = INITIAL_STATE, action) {
         case "$fw/checksum":
         case "$implementation/ota/enabled":
         case "$stats/signal":
+            var message = action.payload.message
+            var serial = action.payload.serial
             return {
                 ...state,
-                [action.type]: action.payload,
-                last_seen: Math.floor((new Date).getTime() / 1000)
+                [serial]: {
+                    ...state[serial],
+                    [action.type]: message,
+                    last_seen: Math.floor((new Date).getTime() / 1000)
+                }
             }
         case "$implementation/config":
-            const config = JSON.parse(action.payload);
-            const grow_schedule = JSON.parse(config.settings.schedule);
+            var serial = action.payload.serial
+            var config = JSON.parse(action.payload.message);
+            var grow_schedule = JSON.parse(config.settings.schedule);
             return {
                 ...state,
-                [action.type]: config,
-                grow_schedule: grow_schedule,
-                last_seen: Math.floor((new Date).getTime() / 1000)
+                [serial]: {
+                    ...state[serial],
+                    [action.type]: config,
+                    grow_schedule: grow_schedule,
+                    last_seen: Math.floor((new Date).getTime() / 1000)
+                }
             }
     }
 }

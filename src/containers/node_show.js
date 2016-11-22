@@ -24,45 +24,49 @@ class NodesShow extends Component {
     }
 
     renderLastSeen() {
-        if (this.props.mqtt["last_seen"]) {
-            return <TimeAgo date={new Date(this.props.mqtt["last_seen"]*1000)} />
+        const node = this.props.mqtt[this.props.params.node_id];
+        if (node["last_seen"]) {
+            return <TimeAgo date={new Date(node["last_seen"]*1000)} />
         }
         return null;
     }
 
     
     render () {
+        const node = this.props.mqtt[this.props.params.node_id];
+        if (!node) {
+            return null
+        }
         return (
             <div>
                 <h1>Grow Node {this.props.params.node_id}</h1>
                 <p>
-                    Nickname: {this.props.mqtt["$name"]}<br/>
-                    Online? {this.props.mqtt["$online"]}<br/>
+                    Nickname: {node["$name"]}<br/>
+                    Online? {node["$online"]}<br/>
                     Last Seen: {this.renderLastSeen()}
                 </p>
                 <h2>System Information</h2>
                 <p>
-                    Framework Version: {this.props.mqtt["$homie"]}<br/>
-                    Firmware: {this.props.mqtt["$fw/name"]}<br/>
-                    Version: {this.props.mqtt["$fw/version"]}<br/>
-                    Checksum: {this.props.mqtt["$fw/checksum"]}<br/>
-                    OTA Enabled: {this.props.mqtt["$implementation/ota/enabled"]}
+                    Framework Version: {node["$homie"]}<br/>
+                    Firmware: {node["$fw/name"]}<br/>
+                    Version: {node["$fw/version"]}<br/>
+                    Checksum: {node["$fw/checksum"]}<br/>
+                    OTA Enabled: {node["$implementation/ota/enabled"]}
                 </p>
                 <h2>WiFi Information</h2>
                 <p>
-                    Wifi Signal Strength: {this.props.mqtt["$stats/signal"]}<br/>
-                    MAC Address: {this.props.mqtt["$mac"]}<br/>
-                    Local IP Address: {this.props.mqtt["$localip"]}
+                    Wifi Signal Strength: {node["$stats/signal"]}<br/>
+                    MAC Address: {node["$mac"]}<br/>
+                    Local IP Address: {node["$localip"]}
                 </p>
                 <h2>Grow Schedule</h2>
-                <GrowScheduleEditor grow_schedule={this.props.mqtt.grow_schedule}/>
+                <GrowScheduleEditor grow_schedule={node.grow_schedule}/>
             </div>
         );
     }
 }
 
 function mapStateToProps (state) {
-    console.log(state.mqtt);
     return { mqtt: state.mqtt}
 }
 function mapDispatchToProps(dispatch) {
