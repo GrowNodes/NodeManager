@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-import { NEW_MQTT_MESSAGE, FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT } from './types.js';
+import { MQTT_INCOMING, FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT } from './types.js';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
 const API_KEY = '?key=some_offensive_words'
 
 export function receiveMessage(message) {
     console.log(message);
-  return { type: NEW_MQTT_MESSAGE, payload: message };
+  return { type: MQTT_INCOMING, payload: message };
 }
 export function mqttConnect() {
     console.log("returning connect action type")
