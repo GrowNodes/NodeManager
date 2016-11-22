@@ -14,10 +14,11 @@ import MqttInstance from './utils/Mqtt.js';
 import * as Actions from './actions';
 import * as ActionTypes from './actions/types.js';
 
-const createStoreWithMiddleware = applyMiddleware(
+
+ const createStoreWithMiddleware = applyMiddleware(
     promise
 )(createStore);
-const finalStore = createStoreWithMiddleware(reducers)
+const finalStore = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 const URL = 'test.mosquitto.org';
