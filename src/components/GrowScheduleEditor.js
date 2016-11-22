@@ -35,7 +35,6 @@ class GrowScheduleEditor extends Component {
 
 
   render() {
-    console.log(this.props.grow_schedule)
     if (this.props.grow_schedule) {
         return (
             <div>
