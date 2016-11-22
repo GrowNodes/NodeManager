@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
 import * as Actions from '../actions';
@@ -12,16 +11,6 @@ class NodesShow extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
-
-    componentWillMount() {
-        console.log("calling connect action");
-        this.props.actions.mqttConnect([this.props.params.node_id])
-    }
-
-    componentWillUnmount() {
-        console.log("calling disconnect action");
-        this.props.actions.mqttDisconnect()
-    }
 
     renderLastSeen() {
         const node = this.props.mqtt[this.props.params.node_id];
@@ -69,10 +58,5 @@ class NodesShow extends Component {
 function mapStateToProps (state) {
     return { mqtt: state.mqtt}
 }
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(NodesShow);
+export default connect(mapStateToProps, null)(NodesShow);
