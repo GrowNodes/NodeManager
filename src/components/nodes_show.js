@@ -21,6 +21,7 @@ class NodesShow extends Component {
         return (
             <ul>
 <li>$online: {this.props.mqtt["$online"]}</li>
+<li>last_seen: {this.props.mqtt["last_seen"]}</li>
 <li>$homie: {this.props.mqtt["$homie"]}</li>
 <li>$mac: {this.props.mqtt["$mac"]}</li>
 <li>$name: {this.props.mqtt["$name"]}</li>

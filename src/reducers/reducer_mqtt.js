@@ -29,7 +29,8 @@ export default function(state = INITIAL_STATE, action) {
         case "$stats/signal":
             return {
                 ...state,
-                [action.type]: action.payload
+                [action.type]: action.payload,
+                last_seen: (new Date).getTime()
             }
     }
 }
