@@ -19,16 +19,26 @@ class NodesShow extends Component {
     
     render () {
         return (
-            <p>
-                {this.props.message}
-            </p>
+            <ul>
+<li>$online: {this.props.mqtt["$online"]}</li>
+<li>$homie: {this.props.mqtt["$homie"]}</li>
+<li>$mac: {this.props.mqtt["$mac"]}</li>
+<li>$name: {this.props.mqtt["$name"]}</li>
+<li>$localip: {this.props.mqtt["$localip"]}</li>
+<li>$fw/name: {this.props.mqtt["$fw/name"]}</li>
+<li>$fw/version: {this.props.mqtt["$fw/version"]}</li>
+<li>$fw/checksum: {this.props.mqtt["$fw/checksum"]}</li>
+<li>$implementation/config: {this.props.mqtt["$implementation/config"]}</li>
+<li>$implementation/ota/enabled: {this.props.mqtt["$implementation/ota/enabled"]}</li>
+<li>$stats/signal: {this.props.mqtt["$stats/signal"]}</li>
+            </ul>
         );
     }
 }
 
 function mapStateToProps (state) {
     console.log(state.mqtt);
-    return { message: state.mqtt.message }
+    return { mqtt: state.mqtt}
 }
 function mapDispatchToProps(dispatch) {
   return {

@@ -6,9 +6,12 @@ const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
 const API_KEY = '?key=some_offensive_words'
 
 export function mqttIncoming(topic, message) {
-    const subtopic = topic.substring(topic.indexOf("/") + 1);
-    console.log(subtopic);
-    console.log(message);
+    // Remove /nodes/serialnumber/ from topic
+    // and then dispatch action
+    var subtopic = topic.substring(topic.indexOf("/") + 1);
+    var subtopic = subtopic.substring(subtopic.indexOf("/") + 1);
+    // console.log(subtopic);
+    // console.log(message);
   return { type: subtopic, payload: message };
 }
 export function mqttConnect(topic) {

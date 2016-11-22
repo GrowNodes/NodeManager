@@ -7,7 +7,7 @@ export default class Mqtt {
     this.client  = mqtt.connect(`mqtt://${url}:8080`);
     this.dispatcher = dispatcher
     this.client.on('connect', function () {
-		parent.client.subscribe(channel+"/#")
+		parent.client.subscribe("nodes/"+channel+"/#")
 		parent.client.publish(channel, 'Hello mqtt')
 	})
 	

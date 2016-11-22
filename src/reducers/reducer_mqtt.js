@@ -1,6 +1,6 @@
-import { MQTT_CONNECT } from '../actions/types';
+import * as MQTT_ACTION_TYPES from '../actions/types';
 
-const INITIAL_STATE = { message: [], channel: null};
+const INITIAL_STATE = {};
 
 
 
@@ -9,16 +9,27 @@ export default function(state = INITIAL_STATE, action) {
         default:
             return state;
         
-        case MQTT_CONNECT:
+        case MQTT_ACTION_TYPES.MQTT_CONNECT:
         console.log("mqtt connect dispatch");
         return {
             ...state,
             channel: action.payload
         }
-        case "asdf":
+        // Topic matching action names
+        case "$homie":
+        case "$mac":
+        case "$name":
+        case "$localip":
+        case "$online":
+        case "$fw/name":
+        case "$fw/version":
+        case "$fw/checksum":
+        case "$implementation/config":
+        case "$implementation/ota/enabled":
+        case "$stats/signal":
             return {
                 ...state,
-                message: [...state.message, action.payload]
+                [action.type]: action.payload
             }
     }
 }
