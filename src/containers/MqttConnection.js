@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as Actions from '../actions';
-import GrowScheduleEditor from '../components/GrowScheduleEditor';
-import Moment from 'react-moment';
-import TimeAgo from 'react-timeago'
 
 class MqttConnection extends Component {
     serialNumbers() {
@@ -23,7 +20,7 @@ class MqttConnection extends Component {
     }
 
     render () {
-        return <div>Connecting to {this.serialNumbers()}</div>
+        return null
     }
 }
 
