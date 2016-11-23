@@ -51,11 +51,13 @@ function checkAuth() {
                     } else {
                         // Auth check failed
                         reactCookie.remove('authorization');
+                        reactCookie.remove('email');
                         dispatch({ type: AUTHFAILED_USER, payload: 401 });
                     }
                 },
                 (error) => {
                     reactCookie.remove('authorization');
+                    reactCookie.remove('email');
                     dispatch({ type: AUTHFAILED_USER, payload: error });
                 }
             );
