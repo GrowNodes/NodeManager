@@ -44,7 +44,10 @@ export function signinUser({email, password}) {
                             browserHistory.push('/');
                         };
                     };
+                },
+                (error) => {
+                    dispatch({ type: AUTHFAILED_USER, payload: "Server Error" });
                 }
-            );
+            )
     }
 }

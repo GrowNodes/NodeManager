@@ -30,7 +30,7 @@ function checkAuth() {
         const authCookie = reactCookie.load('authorization');
         const emailCookie = reactCookie.load('email');
 
-        const request = new Request(`${API_SERVER}/secured`, {
+        const request = new Request(`${API_SERVER}/authcheck`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type' : 'application/json',
