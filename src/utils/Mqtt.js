@@ -21,8 +21,8 @@ export default class Mqtt {
         })
 
         const dispatchDisconnected = function() {
-            consol.log('dispatching disconnect');
-          dispatcher(MQTT_ACTION_TYPES.MQTT_CONNECTED, null)
+            console.log('dispatching disconnected');
+          dispatcher(MQTT_ACTION_TYPES.MQTT_DISCONNECTED, null)
         }
 
         this.client.on('offline', dispatchDisconnected)

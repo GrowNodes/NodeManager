@@ -19,7 +19,6 @@ export default function(state = INITIAL_STATE, action) {
 
         
         case NODE_ACTION_TYPES.MQTT_DISCONNECT:
-        console.log("mqtt disconnect dispatch");
         return INITIAL_STATE;
         
         // Topic matching action names

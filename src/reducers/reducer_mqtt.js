@@ -19,6 +19,7 @@ export default function(state = INITIAL_STATE, action) {
             return "DISCONNECTING";
 
         case MQTT_ACTION_TYPES.MQTT_DISCONNECTED:
+            console.log("mqtt disconnect dispatch");
             return INITIAL_STATE;
     }
 }
