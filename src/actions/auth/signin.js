@@ -10,22 +10,23 @@ import reactCookie from 'react-cookie';
 
 
 export function signinUser({email, password}) {
+    const emailCandidate = email
     return (dispatch, getState) => {
         const successPath = getState().auth.successPath;
 
         const request = new Request(`${API_SERVER}/authenticate`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type' : 'application/json'}),
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({auth:{email, password}})
         });
 
         return fetch(request)
             .then((response) => {
-                if (response.status == 401) {
+                if (response.status == 404) {
                     dispatch({ type: AUTHFAILED_USER, payload: "Incorrect email or password" })
                     return null;
                 }
-                if(response.status == 200) {
+                if(response.status == 201) {
                     return response.json();
                 }
                 dispatch({ type: AUTHFAILED_USER, payload: "Server Error" });
@@ -34,8 +35,9 @@ export function signinUser({email, password}) {
             .then(
                 (result) => {
                     if (result) {
-                        reactCookie.save('authorization', result.auth_token, { path: '/' });
-                        dispatch({ type: AUTHED_USER, payload: result });
+                        reactCookie.save('authorization', result.jwt, { path: '/' });
+                        reactCookie.save('email', email, { path: '/' });
+                        dispatch({ type: AUTHED_USER, payload: {auth_token: result.jwt, email: emailCandidate }});
                         if (successPath) {
                             browserHistory.push(successPath);
                         } else {

@@ -28,12 +28,13 @@ function shouldCheckAuth(state) {
 function checkAuth() {
     return (dispatch) => {
         const authCookie = reactCookie.load('authorization');
+        const emailCookie = reactCookie.load('email');
 
-        const request = new Request(`${API_SERVER}/nodes`, {
+        const request = new Request(`${API_SERVER}/secured`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type' : 'application/json',
-                'Authorization' : authCookie
+                'Authorization' : 'Bearer '+authCookie
             })
         });
 
@@ -45,7 +46,7 @@ function checkAuth() {
                 (result) => {
                     if (result.ok) {
                         // Auth check success
-                        const payload = { auth_token: authCookie, email:"somename@example.com" }
+                        const payload = { auth_token: authCookie, email: emailCookie }
                         dispatch({ type: AUTHED_USER, payload: payload });
                     } else {
                         // Auth check failed
