@@ -8,7 +8,9 @@ export default function(state = INITIAL_STATE, action) {
     switch(action.type) {
         default:
             return state;
-        
+        case NODE_ACTION_TYPES.FETCHED_NODES:
+            return action.payload
+
         case NODE_ACTION_TYPES.MQTT_CONNECT:
         console.log("mqtt connect dispatch");
         var newState = {...state}
