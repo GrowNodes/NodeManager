@@ -13,7 +13,7 @@ class NodesList extends Component {
 
 
     render() {
-        if (this.props.nodes) {
+        if (this.props.nodes && this.props.authenticated) {
             return(
                 <div>
                     <strong>Available Nodes</strong>
@@ -29,7 +29,7 @@ class NodesList extends Component {
 }
 
 function mapStateToProps (state) {
-    return { nodes: state.nodes}
+    return { nodes: state.nodes, authenticated: state.auth.authenticated}
 }
 
 export default connect(mapStateToProps, null)(NodesList);

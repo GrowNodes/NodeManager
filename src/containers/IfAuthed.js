@@ -10,7 +10,6 @@ class ifAuthed extends Component {
         if (this.props.authenticated && this.props.serials) {
             return(
                 <div>
-                    IFAUTHED
                     <MqttConnection serials={this.props.serials}/>
                 </div>
             )
