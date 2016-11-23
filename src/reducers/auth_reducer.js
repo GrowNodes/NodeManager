@@ -1,3 +1,5 @@
+import reactCookie from 'react-cookie';
+
 import {
     AUTHED_USER,
     AUTHFAILED_USER,
@@ -33,6 +35,8 @@ export default function(state = INITIAL_STATE, action) {
             }
 
         case AUTHFAILED_USER:
+            reactCookie.remove('authorization');
+            reactCookie.remove('email');
             return {...state, error: action.payload}
             
         case SET_REDIRECT_ON_AUTH:

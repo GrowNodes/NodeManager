@@ -2,7 +2,7 @@ import {
     AUTHED_USER,
     AUTHFAILED_USER
 } from './types';
-
+import * as Actions from '../index';
 import reactCookie from 'react-cookie';
 import {API_SERVER} from '../api.js';
 
@@ -48,16 +48,13 @@ function checkAuth() {
                         // Auth check success
                         const payload = { auth_token: authCookie, email: emailCookie }
                         dispatch({ type: AUTHED_USER, payload: payload });
+                        Actions.fetchNodes(dispatch);
                     } else {
                         // Auth check failed
-                        reactCookie.remove('authorization');
-                        reactCookie.remove('email');
                         dispatch({ type: AUTHFAILED_USER, payload: 401 });
                     }
                 },
                 (error) => {
-                    reactCookie.remove('authorization');
-                    reactCookie.remove('email');
                     dispatch({ type: AUTHFAILED_USER, payload: error });
                 }
             );

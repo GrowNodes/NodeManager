@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-import { FETCH_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT, MQTT_DISCONNECT } from './types.js';
+import {authedApiRequest} from './api'
+import { FETCHED_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT, MQTT_DISCONNECT, APP_ERROR } from './types.js';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
-const API_KEY = '?key=some_offensive_words'
 
 export function mqttIncoming(topic, message) {
     // Remove /nodes/serialnumber/ from topic
@@ -30,18 +29,41 @@ export function mqttDisconnect() {
     }
 }
 
-export function fetchNodes() {
-    const request = axios.get(`${ROOT_URL}/nodes${API_KEY}`);
+export function fetchNodes(dispatch) {
+    // const request = axios.get(`${ROOT_URL}/nodes`);
 
-    return {
-        type: FETCH_NODES,
-        payload: request
-    };
+    // return {
+    //     type: FETCHED_NODES,
+    //     payload: request
+    // };
+    const request = authedApiRequest('GET', '/nodes');
+    return fetch(request)
+            .then((response) => {
+                return response.json();
+            })
+            .then(
+                (result) => {
+                    if (result) {
+                        console.log(result)
+                        var payload = {}
+                        for (var i = result.length - 1; i >= 0; i--) {
+                            payload[result[i]] = {}
+                        }
+                        dispatch({ type: FETCHED_NODES, payload });
+                    } else {
+                        // Auth check failed
+                        dispatch({ type: APP_ERROR, payload: "error fetching nodes serials" });
+                    }
+                },
+                (error) => {
+                    dispatch({ type: APP_ERROR, payload: "error fetching nodes serials" });
+                }
+            );
 }
 
 
 export function createNode (props) {
-    const request = axios.node(`${ROOT_URL}/nodes${API_KEY}`, props);
+    const request = axios.node(`${ROOT_URL}/nodes`, props);
 
     return {
         type: CREATE_NODE,
@@ -59,7 +81,7 @@ export function fetchNode(id) {
 
 
 export function deleteNode(id) {
-    const request = axios.delete(`${ROOT_URL}/nodes/${id}${API_KEY}`);
+    const request = axios.delete(`${ROOT_URL}/nodes/${id}`);
 
     return {
         type: DELETE_NODE,

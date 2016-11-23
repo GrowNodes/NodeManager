@@ -4,7 +4,7 @@ import {
 } from './types';
 
 import {API_SERVER} from '../api.js';
-
+import * as Actions from '../index';
 import { browserHistory } from 'react-router';
 import reactCookie from 'react-cookie';
 
@@ -37,7 +37,10 @@ export function signinUser({email, password}) {
                     if (result) {
                         reactCookie.save('authorization', result.jwt, { path: '/' });
                         reactCookie.save('email', email, { path: '/' });
+                        
                         dispatch({ type: AUTHED_USER, payload: {auth_token: result.jwt, email: emailCandidate }});
+                        Actions.fetchNodes(dispatch);
+
                         if (successPath) {
                             browserHistory.push(successPath);
                         } else {
