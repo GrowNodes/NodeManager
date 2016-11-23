@@ -25,9 +25,3 @@ export function signupUser({email, password}) {
             });
     }
 }
-
-
-export function signoutUser() {
-    localStorage.removeItem('token');
-    return {type: UNAUTH_USER}
-}

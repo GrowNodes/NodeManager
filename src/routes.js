@@ -39,6 +39,7 @@ export default function(store) {
 	        <Route path="nodes/new" component={NodeNew} />
 	        <Route path="nodes/:node_id" component={NodeShow} onEnter={authenticate}/>
             <Route path='sign_in' component={SignIn} />
+            <Route path='sign_out' component={SignOut} />
 	    </Route>
     )
 };
