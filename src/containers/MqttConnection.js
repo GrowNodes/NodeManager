@@ -21,13 +21,13 @@ class MqttConnection extends Component {
 
     render () {
         return <div>
-            {}
+            {this.props.mqtt}
         </div>
     }
 }
 
 function mapStateToProps (state) {
-    return { nodes: state.nodes}
+    return { mqtt: state.mqtt}
 }
 function mapDispatchToProps(dispatch) {
   return {

@@ -10,9 +10,15 @@ export default function(state = INITIAL_STATE, action) {
             return state;
         
         case MQTT_ACTION_TYPES.MQTT_CONNECT:
+            return "CONNETING";
+
+        case MQTT_ACTION_TYPES.MQTT_CONNECTED:
             return "CONNETED";
     
         case MQTT_ACTION_TYPES.MQTT_DISCONNECT:
+            return "DISCONNECTING";
+
+        case MQTT_ACTION_TYPES.MQTT_DISCONNECTED:
             return INITIAL_STATE;
     }
 }
