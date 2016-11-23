@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 
 import * as Actions from '../actions';
 import MqttConnection from '../containers/MqttConnection';
+
+// This is needed because connections/data fetching is done using lifecycle hooks
 class ifAuthed extends Component {
     render () {
 

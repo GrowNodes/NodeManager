@@ -18,7 +18,7 @@ class MqttConnection extends Component {
 
     render () {
         return <div>
-            {this.props.mqtt}
+            MQTT Connection: {this.props.mqtt}
         </div>
     }
 }
