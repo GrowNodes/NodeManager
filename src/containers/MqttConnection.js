@@ -20,12 +20,14 @@ class MqttConnection extends Component {
     }
 
     render () {
-        return null
+        return <div>
+            {}
+        </div>
     }
 }
 
 function mapStateToProps (state) {
-    return { mqtt: state.mqtt}
+    return { nodes: state.nodes}
 }
 function mapDispatchToProps(dispatch) {
   return {

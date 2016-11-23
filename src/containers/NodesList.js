@@ -5,15 +5,15 @@ import NodesListItem from '../components/NodesListItem'
 
 class NodesList extends Component {
     renderNodesListItems() {
-        const mqtt = this.props.mqtt;
-        return Object.keys(mqtt).map((key, index) => {
-           return <NodesListItem node={mqtt[key]} serial={key} key={key}/>
+        const nodes = this.props.nodes;
+        return Object.keys(nodes).map((key, index) => {
+           return <NodesListItem node={nodes[key]} serial={key} key={key}/>
         });
     }
 
 
     render() {
-        if (this.props.mqtt) {
+        if (this.props.nodes) {
             return(
                 <div>
                     <strong>Available Nodes</strong>
@@ -29,7 +29,7 @@ class NodesList extends Component {
 }
 
 function mapStateToProps (state) {
-    return { mqtt: state.mqtt}
+    return { nodes: state.nodes}
 }
 
 export default connect(mapStateToProps, null)(NodesList);

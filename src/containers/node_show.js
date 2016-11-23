@@ -13,7 +13,7 @@ class NodesShow extends Component {
     };
 
     renderLastSeen() {
-        const node = this.props.mqtt[this.props.params.node_id];
+        const node = this.props.nodes[this.props.params.node_id];
         if (node["last_seen"]) {
             return <TimeAgo date={new Date(node["last_seen"]*1000)} />
         }
@@ -22,7 +22,7 @@ class NodesShow extends Component {
 
     
     render () {
-        const node = this.props.mqtt[this.props.params.node_id];
+        const node = this.props.nodes[this.props.params.node_id];
         if (!node) {
             return null
         }
@@ -56,7 +56,7 @@ class NodesShow extends Component {
 }
 
 function mapStateToProps (state) {
-    return { mqtt: state.mqtt}
+    return { nodes: state.nodes}
 }
 
 export default connect(mapStateToProps, null)(NodesShow);
