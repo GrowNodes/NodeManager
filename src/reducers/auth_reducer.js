@@ -6,17 +6,21 @@ import {
 } from '../actions/auth/types';
 
 const INITIAL_STATE = {
-    user: {}
+    error: '',
+    authenticated: false,
+    email: "",
+    successPath: null
 };
 
 export default function(state = INITIAL_STATE, action) {
     switch(action.type) {
         case AUTHED_USER:
+
             return {
                 ...state,
                 error: '',
                 authenticated: true,
-                user: {name: action.payload.name, role: action.payload.role},
+                email: action.payload.email,
                 successPath: null
             }
 
@@ -25,7 +29,7 @@ export default function(state = INITIAL_STATE, action) {
                 ...state,
                 error: '',
                 authenticated: false,
-                user: {}
+                email: ""
             }
 
         case AUTHFAILED_USER:

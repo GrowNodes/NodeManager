@@ -17,7 +17,7 @@ export function signupUser({email, password}) {
         axios.post(`${API_SERVER}/users.json`, {user: {email, password}})
             .then(response => {
                 dispatch({type: AUTH_USER});
-                localStorage.setItem('token', response.data.authorization);
+                localStorage.setItem('token', response.data.auth_token);
                 browserHistory.push('/gigs');
             })
             .catch(response => {

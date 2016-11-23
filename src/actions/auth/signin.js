@@ -13,7 +13,7 @@ export function signinUser({email, password}) {
     return (dispatch, getState) => {
         const successPath = getState().auth.successPath;
 
-        const request = new Request(`${API_SERVER}/users/sign_in.json`, {
+        const request = new Request(`${API_SERVER}/authenticate`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type' : 'application/json'}),
             body: JSON.stringify({email, password})
@@ -34,7 +34,7 @@ export function signinUser({email, password}) {
             .then(
                 (result) => {
                     if (result) {
-                        reactCookie.save('authorization', result.authorization, { path: '/' });
+                        reactCookie.save('authorization', result.auth_token, { path: '/' });
                         dispatch({ type: AUTHED_USER, payload: result });
                         if (successPath) {
                             browserHistory.push(successPath);

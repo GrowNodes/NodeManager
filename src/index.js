@@ -37,8 +37,6 @@ const sock = {
         return sock.ws.postMessage(lastAction.text);
 
       case ActionTypes.MQTT_CONNECT:
-      	console.log("starting")
-  	console.log(lastAction);
         return sock.startWS(lastAction.payload);
 
       case ActionTypes.MQTT_DISCONNECT:

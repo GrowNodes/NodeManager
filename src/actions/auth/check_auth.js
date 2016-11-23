@@ -29,7 +29,7 @@ function checkAuth() {
     return (dispatch) => {
         const authCookie = reactCookie.load('authorization');
 
-        const request = new Request(`${API_SERVER}/check_auth.json`, {
+        const request = new Request(`${API_SERVER}/nodes`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type' : 'application/json',
@@ -39,12 +39,19 @@ function checkAuth() {
 
         return fetch(request)
             .then((response) => {
-                return response.json();
+                return response;
             })
             .then(
                 (result) => {
-                    const payload = { authorization: authCookie, name: result.name, role: result.role }
-                    dispatch({ type: AUTHED_USER, payload: payload });
+                    if (result.ok) {
+                        // Auth check success
+                        const payload = { auth_token: authCookie, email:"somename@example.com" }
+                        dispatch({ type: AUTHED_USER, payload: payload });
+                    } else {
+                        // Auth check failed
+                        reactCookie.remove('authorization');
+                        dispatch({ type: AUTHFAILED_USER, payload: 401 });
+                    }
                 },
                 (error) => {
                     reactCookie.remove('authorization');
