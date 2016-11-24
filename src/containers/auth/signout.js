@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/auth/signout'
+import {signoutUser} from '../../actions/auth/signout'
+import {mqttDisconnect} from '../../actions'
 
 class SignOut extends Component {
     componentDidMount() {
         this.props.signoutUser();
+        this.props.mqttDisconnect();
     }
 
     render () {
@@ -14,4 +16,4 @@ class SignOut extends Component {
     }
 }
 
-export default connect(null, actions)(SignOut);
+export default connect(null, {signoutUser, mqttDisconnect})(SignOut);

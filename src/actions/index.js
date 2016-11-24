@@ -50,6 +50,7 @@ export function fetchNodes(dispatch) {
                             payload[result[i]] = {}
                         }
                         dispatch({ type: FETCHED_NODES, payload });
+                        dispatch(mqttConnect(result));      // clean this up at some point
                     } else {
                         // Auth check failed
                         dispatch({ type: APP_ERROR, payload: "error fetching nodes serials" });

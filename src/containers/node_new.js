@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
-import { createNode } from '../actions/index'
+import { createNode, fetchNodes } from '../actions/index'
 
 class NodeNew extends Component {
     static contextTypes = {
@@ -12,8 +12,9 @@ class NodeNew extends Component {
     onSubmit(props) {
         this.props.createNode(props.serial)   //props from the form
             .then(() => {
-                // blog node has been created (promise has been resolved)
-                this.context.router.push('/');
+                // node has been created (promise has been resolved)
+                // @todo refresh nodes state, reconnect mqtt
+                // this.context.router.push(`/${props.serial}`);
             });
     }
 
