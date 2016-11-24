@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import NodesListItem from '../components/NodesListItem'
 
@@ -20,6 +21,7 @@ class NodesList extends Component {
                     <ul>
                         {this.renderNodesListItems()}
                     </ul>
+                    <Link to="/nodes/new">Add a new node</Link>
                 </div>
             )
         } else {

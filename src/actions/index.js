@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {authedApiRequest} from './api'
+import {authedApiRequest, API_URL} from './api'
 import { FETCHED_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT, MQTT_DISCONNECT, APP_ERROR } from './types.js';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
@@ -63,7 +63,8 @@ export function fetchNodes(dispatch) {
 
 
 export function createNode (props) {
-    const request = axios.node(`${ROOT_URL}/nodes`, props);
+    const authToken = reactCookie.load('authorization');
+    const request = axios.post(`${API_URL}/nodes`, props, { headers: {'Authorization': authToken} });
 
     return {
         type: CREATE_NODE,

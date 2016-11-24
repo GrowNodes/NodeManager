@@ -24,7 +24,7 @@ class NodesShow extends Component {
     render () {
         const node = this.props.nodes[this.props.params.node_id];
         if (!node) {
-            return null
+            return <div>"not found"</div>
         }
         return (
             <div>

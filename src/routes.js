@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/app';
 import NodesIndex from './components/nodes_index';
-import NodeNew from './components/node_new';
+import NodeNew from './containers/node_new';
 import NodeShow from './containers/node_show';
 
 import {checkAuthIfNeeded} from './actions/auth/check_auth';
