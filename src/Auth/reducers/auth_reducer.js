@@ -5,7 +5,7 @@ import {
     AUTHFAILED_USER,
     UNAUTH_USER,
     SET_REDIRECT_ON_AUTH,
-} from '../actions/auth/types';
+} from '../actions/types';
 
 const INITIAL_STATE = {
     error: '',

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
-import { createNode, fetchNodes } from '../actions/index'
+import { createNode, fetchNodes } from '../actions/nodes_actions'
 
 class NodeNew extends Component {
     static contextTypes = {

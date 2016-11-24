@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import NodesList from './NodesList'
+import NodesList from '../../Nodes/containers/NodesList'
 class Navbar extends Component {
     signInOutLink() {
         if (this.props.auth.authenticated) {

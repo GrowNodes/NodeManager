@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { reduxForm } from 'redux-form';
-import * as actions from '../../actions/auth/signin'
+import * as actions from '../actions/sign_in'
 
 class SignIn extends Component {
     handleFormSubmit({email, password}) {

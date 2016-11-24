@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {signoutUser} from '../../actions/auth/signout'
-import {mqttDisconnect} from '../../actions'
+import {signoutUser} from '../actions/sign_out'
+import {mqttDisconnect} from '../../Mqtt/actions/mqtt_actions'
 
 class SignOut extends Component {
     componentDidMount() {

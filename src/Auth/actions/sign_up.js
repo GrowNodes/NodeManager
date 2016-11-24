@@ -3,7 +3,7 @@ import {
     AUTHED_USER,
     AUTHFAILED_USER
 } from './types';
-import {API_SERVER, apiCall} from '../api.js';
+import {API_SERVER} from '../../utils/api.js';
 
 import reactCookie from 'react-cookie';
 

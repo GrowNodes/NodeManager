@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import NodesReducer from './reducer_nodes'
-import MqttReducer from './reducer_mqtt'
+import NodesReducer from '../../Nodes/reducers/reducer_nodes'
+import MqttReducer from '../../Mqtt/reducers/reducer_mqtt'
 import { reducer as formReducer } from 'redux-form';
-import authReducer from './auth_reducer';
+import authReducer from '../../Auth/reducers/auth_reducer';
 
 
 function lastAction(state = null, action) {

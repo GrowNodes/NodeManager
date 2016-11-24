@@ -1,34 +1,9 @@
 import axios from 'axios';
-import {authedApiRequest, API_URL} from './api'
-import { FETCHED_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE, MQTT_CONNECT, MQTT_DISCONNECT, APP_ERROR } from './types.js';
+import {authedApiRequest, API_URL} from '../../utils/api'
+import { FETCHED_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE } from './types.js';
+import { APP_ERROR } from '../../App/actions/types'
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
-
-export function mqttIncoming(topic, message) {
-    // Remove /nodes/serialnumber/ from topic
-    // and then dispatch action
-    const serial = topic.split('/')[1];
-    var subtopic = topic.substring(topic.indexOf("/") + 1);
-    var subtopic = subtopic.substring(subtopic.indexOf("/") + 1);
-    // console.log(subtopic);
-    // console.log(message);
-  return { type: subtopic, payload: {message, serial} };
-}
-export function mqttConnect(topics) {
-    console.log("returning connect action type")
-    return {
-        type: MQTT_CONNECT,
-        payload: topics
-    }
-}
-
-export function mqttDisconnect() {
-    console.log("returning disconnect action type")
-    return {
-        type: MQTT_DISCONNECT
-    }
-}
-
 export function fetchNodes(dispatch) {
     // const request = axios.get(`${ROOT_URL}/nodes`);
 
@@ -90,6 +65,5 @@ export function deleteNode(id) {
         payload: request
     }
 }
-
 
 

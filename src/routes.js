@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/app';
-import NodesIndex from './components/nodes_index';
-import NodeNew from './containers/node_new';
-import NodeShow from './containers/node_show';
+import App from './App/app';
+import NodesIndex from './Nodes/components/nodes_index';
+import NodeNew from './Nodes/containers/NodeNew';
+import NodeShowPage from './Nodes/containers/NodeShowPage';
 
-import {checkAuthIfNeeded} from './actions/auth/check_auth';
-import SignIn from './containers/auth/signin';
-import SignOut from './containers/auth/signout';
+import {checkAuthIfNeeded} from './Auth/actions/check_auth';
+import SignIn from './Auth/containers/sign_in';
+import SignOut from './Auth/containers/sign_out';
 
-import {SET_REDIRECT_ON_AUTH} from './actions/auth/types'
+import {SET_REDIRECT_ON_AUTH} from './Auth/actions/types'
 
 export default function(store) {
     function setRedirect(path) {
@@ -37,7 +37,7 @@ export default function(store) {
 	    <Route path="/" component={App} onEnter={check_auth}>
 	        <IndexRoute component={NodesIndex} />
 	        <Route path="nodes/new" component={NodeNew} />
-	        <Route path="nodes/:node_id" component={NodeShow} onEnter={authenticate}/>
+	        <Route path="nodes/:node_id" component={NodeShowPage} onEnter={authenticate}/>
             <Route path='sign_in' component={SignIn} />
             <Route path='sign_out' component={SignOut} />
 	    </Route>

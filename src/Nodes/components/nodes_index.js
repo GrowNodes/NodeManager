@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchNodes } from '../actions/index';
+import { fetchNodes } from '../actions/nodes_actions';
 import { Link } from 'react-router';
 
 class NodesIndex extends Component {

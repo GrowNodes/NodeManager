@@ -2,9 +2,8 @@ import {
     AUTHED_USER,
     AUTHFAILED_USER
 } from './types';
-import * as Actions from '../index';
 import reactCookie from 'react-cookie';
-import {API_SERVER} from '../api.js';
+import {API_SERVER} from '../../utils/api.js';
 
 export function checkAuthIfNeeded() {
     return (dispatch, getState) => {

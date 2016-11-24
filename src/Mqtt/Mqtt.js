@@ -1,5 +1,5 @@
 import mqtt from 'mqtt';
-import * as MQTT_ACTION_TYPES from '../actions/types';
+import * as MQTT_ACTION_TYPES from './actions/types';
 // See index.js
 export default class Mqtt {
     constructor(url, dispatcher, topics) {

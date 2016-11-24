@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import * as actions from '../../actions/auth/auth_actions'
+import * as actions from '../actions/auth_actions'
 
 class SignUp extends Component {
     handleFormSubmit(formProps) {

@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import * as Actions from '../actions';
+import * as Actions from '../actions/nodes_actions';
 import GrowScheduleEditor from '../components/GrowScheduleEditor';
 import Moment from 'react-moment';
 import TimeAgo from 'react-timeago'

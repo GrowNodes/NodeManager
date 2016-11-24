@@ -7,13 +7,13 @@ import { createStore, combineReducers, applyMiddleware, compose  } from 'redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes'
 
-import reducers from './reducers';
+import reducers from './App/reducers/app_reducer';
 import promise from 'redux-promise'
 import thunkMiddleware from 'redux-thunk';
 
-import MqttInstance from './utils/Mqtt.js';
-import * as Actions from './actions';
-import * as ActionTypes from './actions/types.js';
+import MqttInstance from './Mqtt/Mqtt.js';
+import * as MqttActions from './Mqtt/actions/mqtt_actions';
+import * as ActionTypes from './Mqtt/actions/types.js';
 
 
  const createStoreWithMiddleware = applyMiddleware(
@@ -27,7 +27,7 @@ const sock = {
   ws: null,
   URL: 'test.mosquitto.org',
   wsDipatcher: (topic, message) => {
-    return store.dispatch(Actions.mqttIncoming(topic, message));
+    return store.dispatch(MqttActions.mqttIncoming(topic, message));
   },
   wsListener: () => {
     const { lastAction } = store.getState();
