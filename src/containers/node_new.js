@@ -10,7 +10,7 @@ class NodeNew extends Component {
     };
 
     onSubmit(props) {
-        this.props.createNode(props)   //props from the form
+        this.props.createNode(props.serial)   //props from the form
             .then(() => {
                 // blog node has been created (promise has been resolved)
                 this.context.router.push('/');

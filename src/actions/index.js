@@ -62,9 +62,9 @@ export function fetchNodes(dispatch) {
 }
 
 
-export function createNode (props) {
+export function createNode (serial) {
     const authToken = reactCookie.load('authorization');
-    const request = axios.post(`${API_URL}/nodes`, props, { headers: {'Authorization': authToken} });
+    const request = axios.post(`${API_URL}/nodes/${serial}/attach`, null, { headers: {'Authorization': authToken} });
 
     return {
         type: CREATE_NODE,
