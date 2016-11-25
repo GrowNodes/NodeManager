@@ -22,7 +22,6 @@ import * as ActionTypes from './Mqtt/actions/types.js';
 const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
-const URL = 'test.mosquitto.org';
 const sock = {
   ws: null,
   URL: 'test.mosquitto.org',
