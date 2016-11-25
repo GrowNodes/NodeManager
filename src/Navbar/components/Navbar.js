@@ -5,9 +5,9 @@ import NodesList from '../../Nodes/containers/NodesList'
 class Navbar extends Component {
     signInOutLink() {
         if (this.props.auth.authenticated) {
-            return <Link to="sign_out">Click here to sign out</Link>
+            return <Link to="/sign_out">Click here to sign out</Link>
         }
-        return <Link to="sign_in">Click here to sign in</Link>
+        return <Link to="/sign_in">Click here to sign in</Link>
     }
 
 
