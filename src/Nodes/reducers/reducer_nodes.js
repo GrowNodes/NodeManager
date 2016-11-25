@@ -8,7 +8,7 @@ export default function(state = INITIAL_STATE, action) {
     switch(action.type) {
         default:
             return state;
-        case NODE_ACTION_TYPES.FETCHED_NODES:
+        case NODE_ACTION_TYPES.NODES_FETCHED:
             return action.payload
 
         case NODE_ACTION_TYPES.MQTT_CONNECT:

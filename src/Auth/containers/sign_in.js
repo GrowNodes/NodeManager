@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { reduxForm } from 'redux-form';
-import * as actions from '../actions/sign_in'
+import {signinUser} from '../actions/sign_in'
+import {fetchNodes} from '../../Nodes/actions/nodes_actions'
+import {mqttConnect} from '../../Mqtt/actions/mqtt_actions'
 
 class SignIn extends Component {
     handleFormSubmit({email, password}) {
         this.props.signinUser({email, password})
+        .then(() => this.props.fetchNodes())
+        .then(() => {
+            this.props.mqttConnect()
+        })
     }
 
     renderError() {
@@ -47,4 +53,4 @@ function mapStateToProps(state) {
 export default reduxForm({
     form: 'signin',
     fields: ['email', 'password']
-}, mapStateToProps, actions)(SignIn);
+}, mapStateToProps, {signinUser, fetchNodes, mqttConnect})(SignIn);

@@ -49,7 +49,7 @@ class NodesShow extends Component {
                     Local IP Address: {node["$localip"]}
                 </p>
                 <h2>Grow Schedule</h2>
-                <GrowScheduleEditor grow_schedule={node.grow_schedule}/>
+                
             </div>
         );
     }

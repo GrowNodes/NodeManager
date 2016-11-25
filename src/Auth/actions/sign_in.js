@@ -39,7 +39,6 @@ export function signinUser({email, password}) {
                         reactCookie.save('email', email, { path: '/' });
                         
                         dispatch({ type: AUTHED_USER, payload: {auth_token: result.jwt, email: emailCandidate }});
-                        NodesActions.fetchNodes(dispatch);
 
                         if (successPath) {
                             browserHistory.push(successPath);

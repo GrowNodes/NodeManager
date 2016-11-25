@@ -37,7 +37,7 @@ const sock = {
         return sock.ws.postMessage(lastAction.text);
 
       case ActionTypes.MQTT_CONNECT:
-        return sock.startWS(lastAction.payload);
+        return sock.startWS();
 
       case ActionTypes.MQTT_DISCONNECT:
         return sock.stopWS();
@@ -50,10 +50,11 @@ const sock = {
     sock.ws.close();
     sock.ws = null
   },
-  startWS: (topics) => {
+  startWS: () => {
     if(!!sock.ws) sock.ws.close();
-
-    sock.ws = new MqttInstance(sock.URL, sock.wsDipatcher, topics)
+    const { nodes } = store.getState();
+    const serials = Object.keys(nodes)
+    sock.ws = new MqttInstance(sock.URL, sock.wsDipatcher, serials)
   }
 };
 // sock.wsListener();

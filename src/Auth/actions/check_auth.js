@@ -5,6 +5,9 @@ import {
 import reactCookie from 'react-cookie';
 import {API_SERVER} from '../../utils/api.js';
 
+import * as Actions from '../../Nodes/actions/nodes_actions'
+
+
 export function checkAuthIfNeeded() {
     return (dispatch, getState) => {
         if (shouldCheckAuth(getState())) {

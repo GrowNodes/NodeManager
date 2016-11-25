@@ -9,6 +9,8 @@ export default class Mqtt {
         this.dispatcher = dispatcher
 
         this.client.on('connect', function () {
+            console.log("connect")
+            console.log(topics)
             for (var i = topics.length - 1; i >= 0; i--) {
                 parent.client.subscribe("nodes/"+topics[i]+"/#")
                 parent.client.publish(topics[i], 'Hello mqtt')

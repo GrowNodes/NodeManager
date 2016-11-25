@@ -11,6 +11,8 @@ import SignIn from './Auth/containers/sign_in';
 import SignOut from './Auth/containers/sign_out';
 
 import {SET_REDIRECT_ON_AUTH} from './Auth/actions/types'
+import {fetchNodes} from './Nodes/actions/nodes_actions'
+import {mqttConnect} from './Mqtt/actions/mqtt_actions'
 
 export default function(store) {
     function setRedirect(path) {
@@ -28,7 +30,15 @@ export default function(store) {
     }
 
     function check_auth(nextState, replaceState, callback) {
-        store.dispatch(checkAuthIfNeeded()).then(() => {
+        store.dispatch(checkAuthIfNeeded())
+        .then(() => {
+            const authed = store.getState().auth.authenticated;
+            if (authed) {
+                store.dispatch(fetchNodes())
+                .then(() => store.dispatch(mqttConnect()) )
+            }
+        })
+        .then(() => {
             callback();
         });
     }

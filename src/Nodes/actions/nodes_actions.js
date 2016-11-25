@@ -1,40 +1,34 @@
 import axios from 'axios';
 import {authedApiRequest, API_URL} from '../../utils/api'
-import { FETCHED_NODES, CREATE_NODE, FETCH_NODE, DELETE_NODE } from './types.js';
+import { NODES_FETCHED,
+    NODES_INVALID,
+    NODES_FETCHING,
+    NODES_FETCH_FAILED,
+    CREATE_NODE,
+    FETCH_NODE,
+    DELETE_NODE } from './types.js';
 import { APP_ERROR } from '../../App/actions/types'
 
-const ROOT_URL = 'http://reduxblog.herokuapp.com/api'
-export function fetchNodes(dispatch) {
-    // const request = axios.get(`${ROOT_URL}/nodes`);
-
-    // return {
-    //     type: FETCHED_NODES,
-    //     payload: request
-    // };
+export function fetchNodes() {
     const request = authedApiRequest('GET', '/nodes');
-    return fetch(request)
+
+    return (dispatch) => {
+        dispatch({ type: NODES_FETCHING });
+        return fetch(request)
             .then((response) => {
                 return response.json();
             })
             .then(
                 (result) => {
-                    if (result) {
-                        console.log(result)
-                        var payload = {}
-                        for (var i = result.length - 1; i >= 0; i--) {
-                            payload[result[i]] = {}
-                        }
-                        dispatch({ type: FETCHED_NODES, payload });
-                        dispatch(mqttConnect(result));      // clean this up at some point
-                    } else {
-                        // Auth check failed
-                        dispatch({ type: APP_ERROR, payload: "error fetching nodes serials" });
+                    var payload = {}
+                    for (var i = result.length - 1; i >= 0; i--) {
+                        payload[result[i]] = {}
                     }
+                    dispatch({ type: NODES_FETCHED, payload })
                 },
-                (error) => {
-                    dispatch({ type: APP_ERROR, payload: "error fetching nodes serials" });
-                }
+                (error) => dispatch({ type: NODES_FETCH_FAILED, error })
             );
+    }
 }
 
 
