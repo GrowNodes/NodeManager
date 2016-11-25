@@ -44,6 +44,7 @@ class NodesShow extends Component {
                 </p>
                 <h2>WiFi Information</h2>
                 <p>
+                    Saved access point SSID: {node["$implementation/config"] ? node["$implementation/config"].wifi.ssid : null}<br/>
                     Wifi Signal Strength: {node["$stats/signal"]}<br/>
                     MAC Address: {node["$mac"]}<br/>
                     Local IP Address: {node["$localip"]}
