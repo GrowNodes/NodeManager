@@ -47,7 +47,7 @@ const sock = {
     }
   },
   stopWS: () => {
-    sock.ws.close();
+    if (sock.ws) sock.ws.close();
     sock.ws = null
   },
   startWS: () => {
