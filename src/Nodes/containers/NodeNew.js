@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
 import { createNode, fetchNodes } from '../actions/nodes_actions'
+import {mqttConnect} from '../../Mqtt/actions/mqtt_actions'
 
 class NodeNew extends Component {
     static contextTypes = {
@@ -11,11 +12,9 @@ class NodeNew extends Component {
 
     onSubmit(props) {
         this.props.createNode(props.serial)   //props from the form
-            .then(() => {
-                // node has been created (promise has been resolved)
-                // @todo refresh nodes state, reconnect mqtt
-                // this.context.router.push(`/${props.serial}`);
-            });
+        .then(() => this.props.fetchNodes())
+        .then(() => this.props.mqttConnect())
+        .then(() => this.context.router.push(`/nodes/${props.serial}`))
     }
 
     render() {
@@ -55,4 +54,4 @@ export default reduxForm({
     form: 'NodeNewForm',
     fields: ['serial'],
     validate
-}, null, { createNode })(NodeNew);
+}, null, { createNode, fetchNodes, mqttConnect })(NodeNew);
