@@ -9,9 +9,7 @@ class SignIn extends Component {
     handleFormSubmit({email, password}) {
         this.props.signinUser({email, password})
         .then(() => this.props.fetchNodes())
-        .then(() => {
-            this.props.mqttConnect()
-        })
+        .then(() => this.props.mqttConnect())
     }
 
     renderError() {
