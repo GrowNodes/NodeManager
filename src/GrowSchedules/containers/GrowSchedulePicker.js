@@ -19,7 +19,14 @@ class GrowSchedulePicker extends Component {
                     <strong>Available schedules</strong>
                     <ul>
                         {Object.keys(schedules).map(function(key) {
-						    return <li>{schedules[key].meta.name}</li>;
+						    return (
+							    <li>
+							    	{schedules[key].meta.name}
+							    	<pre>
+							    		{JSON.stringify(schedules[key])}
+							    	</pre>
+							    </li>
+						    );
 						})}
                     </ul>
                 </div>
