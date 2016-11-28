@@ -9,6 +9,6 @@ export default function(state = INITIAL_STATE, action) {
         default:
             return state;
         case GS_ACTION_TYPES.SCHEDULE_FETCHED:
-            return {...state, [action.payload.meta.id]: action.payload}
+            return {...state, [action.payload.id]: action.payload}
     }
 }

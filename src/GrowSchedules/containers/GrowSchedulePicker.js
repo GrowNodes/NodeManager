@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-
+import _ from 'lodash';
 import * as Actions from '../actions/grow_schedule_actions';
 
 class GrowSchedulePicker extends Component {
@@ -10,6 +10,28 @@ class GrowSchedulePicker extends Component {
 		this.props.fetchSchedules()
 	}
 
+	renderSchedule(schedule) {
+		return (
+			<li>
+				{schedule.meta.name}
+				<pre>
+					{JSON.stringify(JSON.stringify(schedule))}
+				</pre>
+			</li>
+		)
+	}
+
+	pushSchedule(id) {
+		var schedule = _.clone(this.props.schedules[id])
+		delete schedule.meta
+		var config = {
+			"settings": {
+				"schedule": JSON.stringify(schedule)
+			}
+		}
+		console.log(JSON.stringify(config))
+		// send action to create message
+	}
    
     render () {
         if (this.props.schedules) {
@@ -18,15 +40,9 @@ class GrowSchedulePicker extends Component {
                 <div>
                     <strong>Available schedules</strong>
                     <ul>
-                        {Object.keys(schedules).map(function(key) {
-						    return (
-							    <li>
-							    	{schedules[key].meta.name}
-							    	<pre>
-							    		{JSON.stringify(schedules[key])}
-							    	</pre>
-							    </li>
-						    );
+                        {Object.keys(schedules).map( (key) => {
+                        	this.pushSchedule(key);
+						    return this.renderSchedule(schedules[key])
 						})}
                     </ul>
                 </div>
