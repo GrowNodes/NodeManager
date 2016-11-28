@@ -33,11 +33,9 @@ export default class Mqtt {
         this.client.on('reconnect', dispatchDisconnected)
     }
 
-    postMessage(text) {
-        // this.websocket.send(
-        //   text
-        // );
-        console.log("index.js:39 posting message");
+    sendMessage(topic, message) {
+        this.client.publish(topic, message)
+        console.log("index.js:39 posting message", topic, message);
         return true;
     }
 

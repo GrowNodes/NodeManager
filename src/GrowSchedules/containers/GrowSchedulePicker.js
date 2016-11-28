@@ -2,7 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import _ from 'lodash';
-import * as Actions from '../actions/grow_schedule_actions';
+import { fetchSchedules } from '../actions/grow_schedule_actions';
+import { mqttSend } from '../../Mqtt/actions/mqtt_actions';
 
 class GrowSchedulePicker extends Component {
 
@@ -12,16 +13,14 @@ class GrowSchedulePicker extends Component {
 
 	renderSchedule(schedule) {
 		return (
-			<li>
+			<li onClick={this.pushSchedule.bind(this, schedule.id)}>
 				{schedule.meta.name}
-				<pre>
-					{JSON.stringify(JSON.stringify(schedule))}
-				</pre>
 			</li>
 		)
 	}
 
 	pushSchedule(id) {
+		var id = 1
 		var schedule = _.clone(this.props.schedules[id])
 		delete schedule.meta
 		var config = {
@@ -29,8 +28,9 @@ class GrowSchedulePicker extends Component {
 				"schedule": JSON.stringify(schedule)
 			}
 		}
-		console.log(JSON.stringify(config))
+		const text = JSON.stringify(config)
 		// send action to create message
+		this.props.mqttSend("$implementation/config/set", "text")
 	}
    
     render () {
@@ -41,7 +41,6 @@ class GrowSchedulePicker extends Component {
                     <strong>Available schedules</strong>
                     <ul>
                         {Object.keys(schedules).map( (key) => {
-                        	this.pushSchedule(key);
 						    return this.renderSchedule(schedules[key])
 						})}
                     </ul>
@@ -57,4 +56,4 @@ function mapStateToProps (state) {
     return { schedules: state.grow_schedules}
 }
 
-export default connect(mapStateToProps, Actions)(GrowSchedulePicker);
+export default connect(mapStateToProps, {fetchSchedules, mqttSend})(GrowSchedulePicker);

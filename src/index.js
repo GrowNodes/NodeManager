@@ -32,8 +32,8 @@ const sock = {
     const { lastAction } = store.getState();
 
     switch (lastAction.type) {
-      case ActionTypes.POST_MESSAGE:
-        return sock.ws.postMessage(lastAction.text);
+      case ActionTypes.MQTT_SEND:
+        return sock.ws.sendMessage(lastAction.topic, lastAction.message);
 
       case ActionTypes.MQTT_CONNECT:
         return sock.startWS();
