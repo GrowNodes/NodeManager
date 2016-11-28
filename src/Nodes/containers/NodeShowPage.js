@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import * as Actions from '../actions/nodes_actions';
 import GrowScheduleEditor from '../components/GrowScheduleEditor';
+import GrowSchedulePicker from '../../GrowSchedules/containers/GrowSchedulePicker';
 import Moment from 'react-moment';
 import TimeAgo from 'react-timeago'
 
@@ -51,6 +52,7 @@ class NodesShow extends Component {
                 </p>
                 <h2>Grow Schedule</h2>
                 <GrowScheduleEditor grow_schedule={node.grow_schedule}/>
+                <GrowSchedulePicker/>
             </div>
         );
     }
