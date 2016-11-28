@@ -5,7 +5,7 @@ export default class Mqtt {
     constructor(url, dispatcher, topics) {
         console.log("construtro")
         var parent = this;
-        this.client  = mqtt.connect(`mqtt://${url}:8080`);
+        this.client  = mqtt.connect(`mqtt://${url}:9001`);
         this.dispatcher = dispatcher
 
         this.client.on('connect', function () {

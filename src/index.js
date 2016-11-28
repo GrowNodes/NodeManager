@@ -24,7 +24,7 @@ const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENS
 
 const sock = {
   ws: null,
-  URL: 'test.mosquitto.org',
+  URL: 'demo.grownodes.com',
   wsDipatcher: (topic, message) => {
     return store.dispatch(MqttActions.mqttIncoming(topic, message));
   },
