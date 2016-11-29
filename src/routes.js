@@ -6,6 +6,7 @@ import MainNav from './Nav/containers/MainNav'
 import NodesList from './Nodes/containers/NodesList'
 import NodeNew from './Nodes/containers/NodeNew';
 import NodeShowPage from './Nodes/containers/NodeShowPage';
+import NodeSysinfo from './Nodes/containers/NodeSysinfo';
 import UserSettings from './UserSettings/components/UserSettings';
 import {checkAuthIfNeeded} from './Auth/actions/check_auth';
 import SignIn from './Auth/containers/sign_in';
@@ -50,6 +51,7 @@ export default function(store) {
             <Route path="nodes" component={NodesList} onEnter={authenticate}/>
 	        <Route path="nodes/new" component={NodeNew} onEnter={authenticate}/>
 	        <Route path="nodes/:node_id" component={NodeShowPage} onEnter={authenticate}/>
+            <Route path="nodes/:node_id/sysinfo" component={NodeSysinfo} onEnter={authenticate}/>
             <Route path="settings" component={UserSettings} onEnter={authenticate} />
             <Route path='sign_in' component={SignIn} />
             <Route path='sign_out' component={SignOut} />
