@@ -17,11 +17,12 @@ class NodesList extends Component {
         if (this.props.nodes && this.props.authenticated) {
             return(
                 <div>
-                    <strong>Available Nodes</strong>
+                    <Link to="/">Home</Link><br/>
+                    <strong>My Grow Nodes</strong>
                     <ul>
                         {this.renderNodesListItems()}
                     </ul>
-                    <Link to="/nodes/new">Add a new node</Link>
+                    <Link to="/nodes/new">Add a new node</Link><br/>
                 </div>
             )
         } else {

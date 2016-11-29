@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import NodesList from '../../Nodes/containers/NodesList'
-class Navbar extends Component {
+class UserSettings extends Component {
     signInOutLink() {
         if (this.props.auth.authenticated) {
             return <Link to="/sign_out">Click here to sign out</Link>
@@ -20,7 +19,6 @@ class Navbar extends Component {
                     
                     {this.signInOutLink()}
                 </p>
-                <NodesList />
             </div>
             
         );
@@ -31,4 +29,4 @@ function mapStateToProps (state) {
     return { auth: state.auth}
 }
 
-export default connect(mapStateToProps, null)(Navbar);
+export default connect(mapStateToProps, null)(UserSettings);

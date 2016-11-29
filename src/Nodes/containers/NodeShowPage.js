@@ -29,6 +29,7 @@ class NodesShow extends Component {
         }
         return (
             <div>
+                <Link to="/nodes">Back to Nodes</Link><br/>
                 <h1>Grow Node {this.props.params.node_id}</h1>
                 <p>
                     Nickname: {node["$name"]}<br/>
@@ -52,7 +53,7 @@ class NodesShow extends Component {
                 </p>
                 <h2>Grow Schedule</h2>
                 <GrowScheduleEditor grow_schedule={node.grow_schedule}/>
-                <GrowSchedulePicker/>
+                <GrowSchedulePicker node_id={this.props.params.node_id}/>
             </div>
         );
     }

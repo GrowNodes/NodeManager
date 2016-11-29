@@ -20,7 +20,6 @@ class GrowSchedulePicker extends Component {
 	}
 
 	pushSchedule(id) {
-		var id = 1
 		var schedule = _.clone(this.props.schedules[id])
 		delete schedule.meta
 		var config = {
@@ -30,7 +29,7 @@ class GrowSchedulePicker extends Component {
 		}
 		const text = JSON.stringify(config)
 		// send action to create message
-		this.props.mqttSend("$implementation/config/set", "text")
+		this.props.mqttSend(`${this.props.node_id}/$implementation/config/set`, text)
 	}
    
     render () {

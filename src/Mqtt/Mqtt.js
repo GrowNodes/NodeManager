@@ -34,7 +34,7 @@ export default class Mqtt {
     }
 
     sendMessage(topic, message) {
-        this.client.publish(topic, message)
+        this.client.publish(`nodes/${topic}`, message)
         console.log("index.js:39 posting message", topic, message);
         return true;
     }

@@ -2,10 +2,11 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './App/app';
-import NodesIndex from './Nodes/components/nodes_index';
+import MainNav from './Nav/containers/MainNav'
+import NodesList from './Nodes/containers/NodesList'
 import NodeNew from './Nodes/containers/NodeNew';
 import NodeShowPage from './Nodes/containers/NodeShowPage';
-
+import UserSettings from './UserSettings/components/UserSettings';
 import {checkAuthIfNeeded} from './Auth/actions/check_auth';
 import SignIn from './Auth/containers/sign_in';
 import SignOut from './Auth/containers/sign_out';
@@ -45,9 +46,11 @@ export default function(store) {
 
 	return(
 	    <Route path="/" component={App} onEnter={check_auth}>
-	        <IndexRoute component={NodesIndex} />
-	        <Route path="nodes/new" component={NodeNew} />
+	        <IndexRoute component={MainNav} onEnter={authenticate}/>
+            <Route path="nodes" component={NodesList} onEnter={authenticate}/>
+	        <Route path="nodes/new" component={NodeNew} onEnter={authenticate}/>
 	        <Route path="nodes/:node_id" component={NodeShowPage} onEnter={authenticate}/>
+            <Route path="settings" component={UserSettings} onEnter={authenticate} />
             <Route path='sign_in' component={SignIn} />
             <Route path='sign_out' component={SignOut} />
 	    </Route>

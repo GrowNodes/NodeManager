@@ -7,29 +7,29 @@ import _ from 'lodash'
 
 class GrowScheduleEditor extends Component {
     
-    renderEnsures(ensures) {
-        return ensures.map((ensure) => {
+    renderControls(controls) {
+        return controls.map((control) => {
             return (
                     <li>
-                        <strong>{ensure.control}</strong> params {JSON.stringify(ensure.params)}
+                        {control.device}<br/>
+                        <pre>{JSON.stringify(control.properties)}</pre>
                     </li>
             );
         });
     }
 
 
-    renderTimeRanges() {
+    renderPeriods() {
         if (_.isEmpty(this.props.grow_schedule)) {
             return <strong>No grow schedule loaded.</strong>
         } else {
-            return this.props.grow_schedule.map((timeRange) => {
+            console.log(this.props.grow_schedule)
+            return this.props.grow_schedule.periods.map((period) => {
                 return (
                         <div>
-                            <strong>
-                                From <Moment unix>{timeRange.from}</Moment> to <Moment unix>{timeRange.to}</Moment> 
-                            </strong>
+                            From <Moment unix>{period.from_rel}</Moment> to <Moment unix>{period.to_rel}</Moment> 
                             <ul>
-                                {this.renderEnsures(timeRange.ensure)}
+                                {this.renderControls(period.controls)}
                             </ul>
                         </div>
                 );
@@ -43,7 +43,8 @@ class GrowScheduleEditor extends Component {
     if (this.props.grow_schedule) {
         return (
             <div>
-                {this.renderTimeRanges()}
+                <h4>ID: {this.props.grow_schedule.id}</h4>
+                {this.renderPeriods()}
             </div>
         );
     } else {
