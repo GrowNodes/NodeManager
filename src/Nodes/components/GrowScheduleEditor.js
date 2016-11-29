@@ -27,7 +27,7 @@ class GrowScheduleEditor extends Component {
             return this.props.grow_schedule.periods.map((period) => {
                 return (
                         <div>
-                            From <Moment unix>{period.from_rel}</Moment> to <Moment unix>{period.to_rel}</Moment> 
+                            For {period.name} from <Moment unix>{period.from_rel}</Moment> to <Moment unix>{period.to_rel}</Moment> 
                             <ul>
                                 {this.renderControls(period.controls)}
                             </ul>
