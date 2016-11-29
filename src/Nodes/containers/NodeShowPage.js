@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import * as Actions from '../actions/nodes_actions';
-import GrowScheduleEditor from '../components/GrowScheduleEditor';
-import GrowSchedulePicker from '../../GrowSchedules/containers/GrowSchedulePicker';
+import GrowCycleView from '../../Grow/containers/GrowCycleView';
+import GrowCycleCreator from '../../Grow/containers/GrowCycleCreator';
 import Moment from 'react-moment';
 import TimeAgo from 'react-timeago'
 
@@ -40,8 +40,8 @@ class NodesShow extends Component {
                     <Link to={`/nodes/${this.props.params.node_id}/sysinfo`}>System Information</Link><br/>
                 </p>
                 <h2>Grow Schedule</h2>
-                <GrowScheduleEditor grow_schedule={node.grow_schedule}/>
-                <GrowSchedulePicker node_id={this.props.params.node_id}/>
+                <GrowCycleView node_id={this.props.params.node_id}/>
+                <GrowCycleCreator node_id={this.props.params.node_id}/>
             </div>
         );
     }

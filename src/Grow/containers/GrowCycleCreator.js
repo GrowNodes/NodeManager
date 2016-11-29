@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import _ from 'lodash';
 import { fetchSchedules } from '../actions/grow_schedule_actions';
-import { mqttSend } from '../../Mqtt/actions/mqtt_actions';
+import { createGrowCycle } from '../actions/grow_cycle_actions';
 
-class GrowSchedulePicker extends Component {
+class GrowCycleCreator extends Component {
 
 	componentWillMount() {
 		this.props.fetchSchedules()
@@ -13,23 +13,14 @@ class GrowSchedulePicker extends Component {
 
 	renderSchedule(schedule) {
 		return (
-			<li onClick={this.pushSchedule.bind(this, schedule.id)}>
-				{schedule.meta.name}
+			<li onClick={this.createCycle.bind(this, schedule.id)}>
+				{schedule.name}
 			</li>
 		)
 	}
 
-	pushSchedule(id) {
-		var schedule = _.clone(this.props.schedules[id])
-		delete schedule.meta
-		var config = {
-			"settings": {
-				"schedule": JSON.stringify(schedule)
-			}
-		}
-		const text = JSON.stringify(config)
-		// send action to create message
-		this.props.mqttSend(`${this.props.node_id}/$implementation/config/set`, text)
+	createCycle(schedule_id) {
+		this.props.createGrowCycle(schedule_id, this.props.node_id)
 	}
    
     render () {
@@ -55,4 +46,4 @@ function mapStateToProps (state) {
     return { schedules: state.grow_schedules}
 }
 
-export default connect(mapStateToProps, {fetchSchedules, mqttSend})(GrowSchedulePicker);
+export default connect(mapStateToProps, {fetchSchedules, createGrowCycle})(GrowCycleCreator);

@@ -45,15 +45,13 @@ export default function(state = INITIAL_STATE, action) {
                 }
             }
         case "$implementation/config":
+            var message = JSON.parse(action.payload.message)
             var serial = action.payload.serial
-            var config = JSON.parse(action.payload.message);
-            var grow_schedule = JSON.parse(config.settings.schedule);
             return {
                 ...state,
                 [serial]: {
                     ...state[serial],
-                    [action.type]: config,
-                    grow_schedule: grow_schedule,
+                    [action.type]: message,
                     last_seen: Math.floor((new Date).getTime() / 1000)
                 }
             }
