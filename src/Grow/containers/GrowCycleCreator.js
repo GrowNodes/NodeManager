@@ -28,7 +28,7 @@ class GrowCycleCreator extends Component {
 	    	const schedules = this.props.schedules;
             return(
                 <div>
-                    <strong>Available schedules</strong>
+                    <p><strong>Start a new grow</strong><br/>Pick from these schedules</p>
                     <ul>
                         {Object.keys(schedules).map( (key) => {
 						    return this.renderSchedule(schedules[key])

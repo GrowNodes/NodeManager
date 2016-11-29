@@ -28,8 +28,7 @@ class GrowCycleView extends Component {
 
 
 function mapStateToProps (state) {
-    const data = state.grow_cycles.data
-    return { grow_cycle: data ? data[data.length-1] : null}
+    return { grow_cycle: state.grow_cycle.data}
 }
 
 export default connect(mapStateToProps, { createGrowCycle, fetchGrowCycle })(GrowCycleView);
