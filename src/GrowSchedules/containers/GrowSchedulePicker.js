@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import _ from 'lodash';
-import { fetchSchedules } from '../actions/grow_schedule_actions';
+import { createGrowCycle, fetchSchedules } from '../actions/grow_schedule_actions';
 import { mqttSend } from '../../Mqtt/actions/mqtt_actions';
 
 class GrowSchedulePicker extends Component {
@@ -13,23 +13,26 @@ class GrowSchedulePicker extends Component {
 
 	renderSchedule(schedule) {
 		return (
-			<li onClick={this.pushSchedule.bind(this, schedule.id)}>
-				{schedule.meta.name}
+			<li onClick={this.createAndPushGrowCycle.bind(this, schedule.id)}>
+				{schedule.id} {schedule.name}
 			</li>
 		)
 	}
 
-	pushSchedule(id) {
-		var schedule = _.clone(this.props.schedules[id])
-		delete schedule.meta
-		var config = {
-			"settings": {
-				"schedule": JSON.stringify(schedule)
-			}
-		}
-		const text = JSON.stringify(config)
-		// send action to create message
-		this.props.mqttSend(`${this.props.node_id}/$implementation/config/set`, text)
+	createAndPushGrowCycle(schedule_id) {
+		this.props.createGrowCycle(schedule_id, this.props.node_id)
+		.then((grow_cycle) => {
+			var obj_to_push = _.clone(grow_cycle)
+			var schedule = obj_to_push.grow_schedule
+			delete schedule.id
+			delete schedule.name
+			delete schedule.description
+			obj_to_push.grow_schedule = JSON.stringify(schedule.periods)
+			obj_to_push = {settings: obj_to_push}
+			const text_to_push = JSON.stringify(obj_to_push)
+			// send action to create message
+			this.props.mqttSend(`${this.props.node_id}/$implementation/config/set`, text_to_push)
+		})
 	}
    
     render () {
@@ -55,4 +58,4 @@ function mapStateToProps (state) {
     return { schedules: state.grow_schedules}
 }
 
-export default connect(mapStateToProps, {fetchSchedules, mqttSend})(GrowSchedulePicker);
+export default connect(mapStateToProps, {createGrowCycle, fetchSchedules, mqttSend})(GrowSchedulePicker);

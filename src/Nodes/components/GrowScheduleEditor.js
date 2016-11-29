@@ -20,11 +20,11 @@ class GrowScheduleEditor extends Component {
 
 
     renderPeriods() {
-        if (_.isEmpty(this.props.grow_schedule)) {
+        if (_.isEmpty(this.props.node.grow_schedule)) {
             return <strong>No grow schedule loaded.</strong>
         } else {
-            console.log(this.props.grow_schedule)
-            return this.props.grow_schedule.periods.map((period) => {
+            console.log(this.props.node.grow_schedule)
+            return this.props.node.grow_schedule.map((period) => {
                 return (
                         <div>
                             For {period.name} from <Moment unix>{period.from_rel}</Moment> to <Moment unix>{period.to_rel}</Moment> 
@@ -40,10 +40,10 @@ class GrowScheduleEditor extends Component {
 
 
   render() {
-    if (this.props.grow_schedule) {
+    if (this.props.node["$implementation/config"]) {
         return (
             <div>
-                <h4>ID: {this.props.grow_schedule.id}</h4>
+                <h4>ID: {this.props.node["$implementation/config"].settings.grow_cycle_id}</h4>
                 {this.renderPeriods()}
             </div>
         );

@@ -47,7 +47,7 @@ export default function(state = INITIAL_STATE, action) {
         case "$implementation/config":
             var serial = action.payload.serial
             var config = JSON.parse(action.payload.message);
-            var grow_schedule = JSON.parse(config.settings.schedule);
+            var grow_schedule = JSON.parse(config.settings.grow_schedule);
             return {
                 ...state,
                 [serial]: {
