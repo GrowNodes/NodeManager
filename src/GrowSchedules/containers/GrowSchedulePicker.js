@@ -23,11 +23,7 @@ class GrowSchedulePicker extends Component {
 		this.props.createGrowCycle(schedule_id, this.props.node_id)
 		.then((grow_cycle) => {
 			var obj_to_push = _.clone(grow_cycle)
-			var schedule = obj_to_push.grow_schedule
-			delete schedule.id
-			delete schedule.name
-			delete schedule.description
-			obj_to_push.grow_schedule = JSON.stringify(schedule.periods)
+			obj_to_push.grow_schedule = "http://example.com"
 			obj_to_push = {settings: obj_to_push}
 			const text_to_push = JSON.stringify(obj_to_push)
 			// send action to create message
