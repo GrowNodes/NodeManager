@@ -9,6 +9,7 @@ import { createGrowCycle, fetchGrowCycleIfNeeded } from '../actions/grow_cycle_a
 class GrowCycleView extends Component {
 
     componentWillReceiveProps() {
+        // @todo refactor the entire fetching to a HOC https://github.com/reactjs/react-router-redux/issues/319#issuecomment-192334746
         if (this.props.node.serial) {
             if (!this.props.grow_cycles[this.props.node.serial]) {
                     this.props.fetchGrowCycleIfNeeded(this.props.node.serial)
