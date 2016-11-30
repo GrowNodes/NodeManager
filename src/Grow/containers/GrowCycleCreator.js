@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Moment from 'moment';
 
 class GrowCycleCreator extends Component {
 	formatGrowCycle(cylce_obj) {
@@ -18,7 +19,7 @@ class GrowCycleCreator extends Component {
 	    }
 
 	    obj_to_push.plant_stages = JSON.stringify(obj_to_push.plant_stages)
-
+	    obj_to_push.start_at = Moment(obj_to_push.start_at).unix()
 	    obj_to_push.cycle_id = obj_to_push.id
 	    delete obj_to_push.id
 	    obj_to_push = {settings: obj_to_push}
