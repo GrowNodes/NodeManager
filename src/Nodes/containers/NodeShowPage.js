@@ -40,7 +40,7 @@ class NodesShow extends Component {
                     <Link to={`/nodes/${this.props.params.node_id}/sysinfo`}>System Information</Link><br/>
                 </p>
                 <h2>Grow Cycle</h2>
-                <GrowCycleView node_id={this.props.params.node_id}/>
+                <GrowCycleView node={node}/>
                 <GrowCycleCreator node_id={this.props.params.node_id}/>
             </div>
         );

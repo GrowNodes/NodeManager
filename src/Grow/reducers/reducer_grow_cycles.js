@@ -10,6 +10,15 @@ export default function(state = INITIAL_STATE, action) {
             return state;
         case GC_ACTION_TYPES.CYCLE_CREATED:
         case GC_ACTION_TYPES.CYCLE_FETCHED:
-            return {...state, data: action.payload}
+            return {
+            	...state,
+            	[action.payload.node_serial]: {...action.payload, status: "fetched"},
+            }
+		case GC_ACTION_TYPES.CYCLE_CREATEING:
+		case GC_ACTION_TYPES.CYCLE_FETCHING:
+			return {
+            	...state,
+            	[action.node_id]: {...state[action.node_id], status: "fetching"},
+            }
     }
 }

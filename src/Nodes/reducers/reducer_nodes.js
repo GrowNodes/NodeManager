@@ -40,6 +40,7 @@ export default function(state = INITIAL_STATE, action) {
                 ...state,
                 [serial]: {
                     ...state[serial],
+                    serial: serial,
                     [action.type]: message,
                     last_seen: Math.floor((new Date).getTime() / 1000)
                 }

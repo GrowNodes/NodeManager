@@ -1,39 +1,40 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import _ from 'lodash';
-import { fetchSchedules } from '../actions/grow_schedule_actions';
-import { createGrowCycle } from '../actions/grow_cycle_actions';
 
 class GrowCycleCreator extends Component {
+	formatGrowCycle(cylce_obj) {
+	    var obj_to_push = _.clone(cylce_obj)
+	    
+	    for (var i = obj_to_push.plant_stages.length - 1; i >= 0; i--) {
+	        var new_stage = {}
+	        new_stage.from_rel = obj_to_push.plant_stages[i].from_rel
+	        new_stage.to_rel = obj_to_push.plant_stages[i].to_rel
+	        new_stage.light_on_at = obj_to_push.plant_stages[i].light_on_at
+	        new_stage.light_off_at = obj_to_push.plant_stages[i].light_off_at
+	        new_stage.air_temp_high = obj_to_push.plant_stages[i].air_temp_high
+	        new_stage.air_temp_low = obj_to_push.plant_stages[i].air_temp_low
+	        obj_to_push.plant_stages[i] = new_stage
+	    }
 
-	componentWillMount() {
-		this.props.fetchSchedules()
-	}
+	    obj_to_push.plant_stages = JSON.stringify(obj_to_push.plant_stages)
 
-	renderSchedule(schedule) {
-		return (
-			<li onClick={this.createCycle.bind(this, schedule.id)}>
-				{schedule.name}
-			</li>
-		)
-	}
+	    obj_to_push.cycle_id = obj_to_push.id
+	    delete obj_to_push.id
+	    obj_to_push = {settings: obj_to_push}
 
-	createCycle(schedule_id) {
-		this.props.createGrowCycle(schedule_id, this.props.node_id)
+	    const text_to_push = JSON.stringify(obj_to_push)
+	    return text_to_push 
 	}
-   
+	   
     render () {
-        if (this.props.schedules) {
-	    	const schedules = this.props.schedules;
+        if (this.props.grow_cycles[this.props.node_id] && this.props.grow_cycles[this.props.node_id].status == "fetched") {
             return(
                 <div>
-                    <p><strong>Start a new grow</strong><br/>Pick from these schedules</p>
-                    <ul>
-                        {Object.keys(schedules).map( (key) => {
-						    return this.renderSchedule(schedules[key])
-						})}
-                    </ul>
+                Creator:
+                <pre>
+                	{this.formatGrowCycle(this.props.grow_cycles[this.props.node_id])}
+                </pre>
                 </div>
             )
         } else {
@@ -43,7 +44,7 @@ class GrowCycleCreator extends Component {
 }
 
 function mapStateToProps (state) {
-    return { schedules: state.grow_schedules}
+    return { grow_cycles: state.grow_cycles}
 }
 
-export default connect(mapStateToProps, {fetchSchedules, createGrowCycle})(GrowCycleCreator);
+export default connect(mapStateToProps, null)(GrowCycleCreator);

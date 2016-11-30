@@ -14,7 +14,7 @@ function lastAction(state = null, action) {
 const rootReducer = combineReducers({
   auth: authReducer,
   grow_schedules: GrowSchedulesReducer,
-  grow_cycle: GrowCyclesReducer,
+  grow_cycles: GrowCyclesReducer,
   nodes: NodesReducer,
   form: formReducer,
   lastAction: lastAction,

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {authedApiRequest, API_URL} from '../../utils/api'
+import _ from 'lodash';
+
 import {
     CYCLE_CREATEING,
     CYCLE_CREATED,
@@ -18,7 +20,7 @@ export function createGrowCycle(schedule_id, node_id) {
     const request = authedApiRequest('POST', `/nodes/${node_id}/grow_cycles`, JSON.stringify(body));
 
     return (dispatch) => {
-        dispatch({ type: CYCLE_CREATEING });
+        dispatch({ type: CYCLE_CREATEING, node_id});
         return fetch(request)
             .then((response) => {
                 return response.json();
@@ -34,21 +36,33 @@ export function createGrowCycle(schedule_id, node_id) {
 }
 
 
-export function fetchGrowCycle(node_id) {
+export function fetchGrowCycleIfNeeded(node_id) {
     const request = authedApiRequest('GET', `/nodes/${node_id}/grow_cycles`);
 
-    return (dispatch) => {
-        dispatch({ type: CYCLE_FETCHING });
-        return fetch(request)
-            .then((response) => {
-                return response.json();
-            })
-            .then(
-                (result) => {
-                    dispatch({ type: CYCLE_FETCHED, payload: result })
-                    return result
-                },
-                (error) => dispatch({ type: CYCLE_FETCH_FAILED, error })
-            );
+    return (dispatch, getState) => {
+        if (shouldFetchGrowCycle(getState(), node_id)) {
+            dispatch({ type: CYCLE_FETCHING, node_id });
+            return fetch(request)
+                .then((response) => {
+                    return response.json();
+                })
+                .then(
+                    (result) => {
+                        dispatch({ type: CYCLE_FETCHED, payload: result })
+                        return result
+                    },
+                    (error) => dispatch({ type: CYCLE_FETCH_FAILED, error })
+                );
+        }
+    }
+}
+
+function shouldFetchGrowCycle(state, node_id) {
+    if (state.grow_cycles[node_id]
+        && (state.grow_cycles[node_id].status == "fetched" || state.grow_cycles[node_id].status == "fetching")
+    ) {
+        return false
+    } else {
+        return true
     }
 }
