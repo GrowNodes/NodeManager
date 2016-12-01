@@ -22,6 +22,7 @@ class GrowCycleCreator extends Component {
 	    obj_to_push.start_at = Moment(obj_to_push.start_at).unix()
 	    obj_to_push.cycle_id = obj_to_push.id
 	    delete obj_to_push.id
+	    delete obj_to_push.status
 	    obj_to_push = {settings: obj_to_push}
 
 	    const text_to_push = JSON.stringify(obj_to_push)

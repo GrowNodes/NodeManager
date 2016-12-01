@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import Helmet from 'react-helmet';
 import { reduxForm } from 'redux-form';
 import {signinUser} from '../actions/sign_in'
-import {fetchNodes} from '../../Nodes/actions/nodes_actions'
-import {mqttConnect} from '../../Mqtt/actions/mqtt_actions'
+// import {fetchNodes} from '../../Nodes/actions/nodes_actions'
+// import {mqttConnect} from '../../Mqtt/actions/mqtt_actions'
 
 class SignIn extends Component {
     handleFormSubmit({email, password}) {
         this.props.signinUser({email, password})
-        .then(() => this.props.fetchNodes())
-        .then(() => this.props.mqttConnect())
+        // .then(() => this.props.fetchNodes())
+        // .then(() => this.props.mqttConnect())
     }
 
     renderError() {
